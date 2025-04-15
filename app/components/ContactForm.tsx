@@ -2,8 +2,8 @@ import React from "react";
 
 export default function ContactForm() {
     return (
-        <div className="bg-white p-4">
-            <div id="from" className="text-center mb-4">
+        <div id="from" className="bg-white p-4">
+            <div  className="text-center mb-4">
                 <h2>
                     <img src="image/formlogo.png" alt="" className="mx-auto" />
                 </h2>

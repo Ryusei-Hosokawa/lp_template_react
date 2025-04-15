@@ -54,18 +54,19 @@ export const imageData = {
 // CTAボタン系の情報
 export const CtaData = [
     { // CTAボタンの画像
-        imageName: "CTA.png",
-        alt: "CTAボタン",
+        type: "button",
+        imageName: "CTA.svg",               // ボタンの画像名
+        position: "top-[50%] left-[50%]",   // 背景の配置
     },
     { // CTA背景の画像もしくはcssの色
-        imageName: "CTA_bg.jpg",
-        alt: "CTA背景",
+        type: "bg",
+        imageName: "CTA_bg.jpg",            // 背景の画像名
     },
-    { // CTAアイテムの画像と配置
-        imageName: "CTA_item.svg",
-        alt: "CTAアイテム",
-        item: false,
-        position: "top- right-",
+    { // CTAの装飾の要素
+        type: "item",
+        imageName: "CTA_item.svg",          // 装飾の画像名
+        item: false,                        // 装飾の表示有無 → 「false」は装飾を表示しない「true」は表示する
+        position: "top-[50%] left-[3%]",    // 装飾の配置
     },
 ]
 

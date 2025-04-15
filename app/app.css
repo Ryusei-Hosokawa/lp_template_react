@@ -22,6 +22,63 @@ img {
     height: auto;
 }
 
+a {
+    text-decoration: none;
+}
+
 .font-oswald {
     font-family: 'Oswald', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.buttonAnimation {
+    transform: translate(-50%, -50%);
+    transform-origin: center;
+    animation: cta-button-animation 1.5s ease infinite;
+    -webkit-animation: cta-button-animation 1.5s ease infinite;
+}
+
+@keyframes cta-button-animation {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    15% {
+        transform: translate(-50%, -50%) scale(1.03);
+    }
+    30% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    45% {
+        transform: translate(-50%, -50%) scale(1.03);
+    }
+    70% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    90% {
+        transform: translate(-50%, -50%) scale(1.03);
+    }
+}
+
+@-webkit-keyframes cta-button-animation {
+    0% {
+        -webkit-transform: translate(-50%, -50%) scale(1);
+    }
+    15% {
+        -webkit-transform: translate(-50%, -50%) scale(1.03);
+    }
+    30% {
+        -webkit-transform: translate(-50%, -50%) scale(1);
+    }
+    45% {
+        -webkit-transform: translate(-50%, -50%) scale(1.03);
+    }
+    70% {
+        -webkit-transform: translate(-50%, -50%) scale(1);
+    }
+    90% {
+        -webkit-transform: translate(-50%, -50%) scale(1.03);
+    }
 }
