@@ -2,61 +2,53 @@
 export const companyInformation = [
     { 
         type: "company",
-        name: "株式会社和田板金工業", // 会社名
+        name: "株式会社和田板金工業",                    // 会社名
         address: "〒000-0000 東京都千代田区千代田1-1-1", // 郵便番号と住所
-        tel: "000-0000-0000", // 電話番号
-        mail: "info@example.com", // メールアドレス
-        businessHours: "9:00 - 18:00", // 営業時間
+        tel: "000-0000-0000",                          // 電話番号
+        mail: "info@example.com",                      // メールアドレス
+        businessHours: "9:00 - 18:00",                 // 営業時間
     }
 ]
 // ヘッダー画像系の情報
 export const headerData = [
-    { // 会社ロゴ
+    { // 会社ロゴ ここから
         type: "logo",
         link: "/",
-        imageName: "company",
-        imageExtension: "png",
+        imageName: "logo.png",
         alt: "会社ロゴ",
-    },
-    { // LINEの画像
+    },// 会社ロゴ ここまで
+    { // LINEの画像 ここから
         type: "link",
         link: "https://lin.ee/ag7rVqh",
-        imageName: "line",
-        imageExtension: "png",
-        imageNameSp: "line_sp",
-        imageExtensionSp: "svg",
+        imageName: "line_pc.png",
+        imageNameSp: "line_sp.svg",
         alt: "LINE",
-    },
-    { // メールの画像
+    },// LINEの画像 ここまで
+    { // メールの画像 ここから
         type: "link",
-        link: "index.html#from",
-        imageName: "mail",
-        imageExtension: "png",
-        imageNameSp: "mail_sp",
-        imageExtensionSp: "svg",
+        link: "#from",
+        imageName: "mail_pc.png",
+        imageNameSp: "mail_sp.svg",
         alt: "メール",
-    },
-    { // 電話の画像
+    },// メールの画像 ここまで
+    { // 電話の画像 ここから
         type: "link",
         link: "tel:000-0000-0000",
-        imageName: "tel",
-        imageExtension: "svg",
-        imageNameSp: "tel_sp",
-        imageExtensionSp: "svg",
-        alt: "電話番号000-0000-0000",
-    },
-    { // ヘッダーバックグラウンド
+        imageName: "tel_pc.svg",
+        imageNameSp: "tel_sp.svg",
+        alt: "電話番号 000-0000-0000",
+    },// 電話の画像 ここまで
+    { // ヘッダーバックグラウンド ここから
         type: "header",
-        backgroundColor: "bg-[#fff]",
-        height: "70px",
-    },
+        background: "bg-[#fff]",
+    },// ヘッダーバックグラウンド ここまで
 ]
 
-// 画像系の情報
+// メイン画像の情報
 export const imageData = {
-    imageItem: 10, // メインコンテンツ内に並べる画像の数
-    extension: "jpg",
+    imageItem: 10,      // メインコンテンツ内に並べる画像の数
     ctaButton: [9, 10], // これらの番号の画像の下にはCTAボタンを表示しない
+    extension: "jpg",   // 拡張子の種類
 };
 
 // CTAボタン系の情報
@@ -80,10 +72,10 @@ export const CtaData = [
 // 背景設定の情報
 export const backgroundData = {
     type: "background",
-    backgroundColor: "bg-[#fff]", // Tailwindの背景色クラス
-    backgroundImage: "bg-[url('/images/bg.jpg')]", // 背景画像を使用する場合
-    backgroundAttachment: "bg-fixed", // 背景固定
-    backgroundSize: "bg-[50%_auto]", // 背景サイズ
-    backgroundRepeat: "bg-repeat", // 背景繰り返し
-    backgroundPosition: "bg-center", // 背景位置
+    backgroundColor: "bg-[#fff]",                   // Tailwindの背景色クラス
+    backgroundImage: "bg-[url('/images/bg.jpg')]",  // 背景画像を使用する場合
+    backgroundAttachment: "bg-fixed",               // 背景固定
+    backgroundSize: "bg-[50%_auto]",                // 背景サイズ
+    backgroundRepeat: "bg-repeat",                  // 背景繰り返し
+    backgroundPosition: "bg-center",                // 背景位置
 }

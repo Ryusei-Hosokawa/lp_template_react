@@ -1,10 +1,11 @@
+import React from "react";
 export default function PrivacyPolicy() {
     return (
         <main className="page__main">
             <section className="contact" id="entry">
                 <div className="inner1">
-                    <h2 className="section__ttl">プライバシーポリシー</h2>
-                    <p className="form__txt">
+                    <h2>プライバシーポリシー</h2>
+                    <p>
                         株式会社和田板金工業
                         (以下「当社」)は、以下のとおり個人情報保護方針を定め、
                         個人情報保護の仕組みを構築し、全従業員に個人情報保護の重要性の認識と取組みを

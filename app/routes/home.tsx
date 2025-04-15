@@ -1,5 +1,6 @@
+import React from "react";
 import type { Route } from "./+types/home";
-import { Main } from "./Main";
+import Main from "./Main";
 
 export function meta({}: Route.MetaArgs) {
     return [

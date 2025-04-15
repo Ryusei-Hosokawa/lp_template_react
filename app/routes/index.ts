@@ -1,2 +1,2 @@
-export { default as About } from './about';
-export { default as PrivacyPolicy } from './privacy_policy';
+export { default as About } from './About';
+export { default as PrivacyPolicy } from './PrivacyPolicy';

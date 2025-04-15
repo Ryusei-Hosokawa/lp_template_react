@@ -4,8 +4,6 @@ import * as ReactRouter from "react-router";
 const { Link } = ReactRouter;
 
 export default function CompanyLogo() {
-    const logoData = headerData.find(item => item.type === "logo");
-
     return (
         <h1 className="w-[20vw] max-w-[350px]">
             {headerData
@@ -13,7 +11,7 @@ export default function CompanyLogo() {
                 .map((logoData, index) => (
                     <Link to="/" key={index}>
                         <img
-                            src={`/images/${logoData.imageName}.${logoData.imageExtension}`}
+                            src={`/images/${logoData.imageName}`}
                             alt={logoData.alt}
                             className="w-full"
                         />

@@ -14,12 +14,11 @@ export default function Header() {
         <header
             className={`
                 fixed top-0 left-0 w-full shadow-md z-[500]
-                ${headerData.find((item) => item.type === "header")?.backgroundColor}
-                h-[${headerData.find((item) => item.type === "header")?.height}]
+                ${headerData.find((item) => item.type === "header")?.background}
             `}
         >
             {/* ヘッダーの中身を配置するためのコンテナ */}
-            <div className="flex justify-between items-center max-w-screen-xl mx-auto p-4">
+            <div className="flex justify-between items-center max-w-screen-xl mx-auto px-[5%] py-[0.5%]">
                 {/* 会社のロゴを表示 */}
                 <CompanyLogo />
                 {/* ナビゲーションメニュー */}
@@ -34,16 +33,16 @@ export default function Header() {
                                 `}
                             >
                                 {/* リンクを表示 */}
-                                <a href={item.link} className="block h-full">
+                                <a href={item.link} className="block h-auto">
                                     <picture>
                                         {/* スクリーンサイズに応じて異なる画像を表示 */}
                                         <source
-                                            srcSet={`images/${item.imageNameSp}.${item.imageExtensionSp}`}
+                                            srcSet={`images/${item.imageNameSp}`}
                                             media="(max-width: 780px)"
                                         />
                                         {/* デフォルトの画像を表示 */}
                                         <img
-                                            src={`images/${item.imageName}.${item.imageExtension}`}
+                                            src={`images/${item.imageName}`}
                                             alt={item.alt}
                                         />
                                     </picture>
