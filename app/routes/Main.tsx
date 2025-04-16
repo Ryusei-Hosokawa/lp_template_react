@@ -16,9 +16,9 @@ export default function Main() {
     return (
         <main
             className={`
-                max-w-[470px]
                 mx-auto
                 drop-shadow-[0_0_10px_rgba(0,0,0,0.3)]
+                ${imageData.mainWidth}
             `}
         >
             <div className="h-[auto]">
