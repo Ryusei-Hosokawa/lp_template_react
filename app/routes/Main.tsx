@@ -6,6 +6,7 @@ import { useHeaderResizeEffect } from "../logics/headerResizeObserver";
 export default function Main() {
     // ヘッダー高さ自動調整機能を適用
     useHeaderResizeEffect();
+
     // 画像配列を生成（1からimageItem数まで）
     const imageNumbers = Array.from(
         { length: imageData.imageItem },

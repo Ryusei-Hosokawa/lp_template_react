@@ -34,6 +34,15 @@ html {
     scroll-behavior: smooth;
 }
 
+.hoverAction {
+    transition: all 0.3s ease-in-out;
+}
+
+.hoverAction:hover {
+    transform: scale(1.02);
+    opacity: 0.8;
+}
+
 .buttonAnimation {
     transform: translate(-50%, -50%);
     transform-origin: center;

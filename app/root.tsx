@@ -3,26 +3,26 @@ import React from "react";
 // React Routerからルーティング関連の機能をインポート
 import {
     isRouteErrorResponse, // エラーレスポンスかどうかを判定する関数
-    Links,                // CSSなどのリンクタグを管理するコンポーネント
-    Meta,                 // メタタグを管理するコンポーネント
-    Outlet,               // 子ルートのコンポーネントを表示する場所を指定
-    Scripts,              // JavaScriptを読み込むためのコンポーネント
-    ScrollRestoration,    // ページ遷移時のスクロール位置を復元するコンポーネント
+    Outlet, // 子ルートのコンポーネントを表示する場所を指定
+    Scripts, // JavaScriptを読み込むためのコンポーネント
+    ScrollRestoration, // ページ遷移時のスクロール位置を復元するコンポーネント
 } from "react-router";
-import * as layouts from "./layouts";        // レイアウト関連のコンポーネントをインポート（ヘッダー、フッターなど）
-import type { Route } from "./+types/root";  // 型定義をインポート
-import "./app.css";                          // グローバルCSSをインポート
-import { backgroundData } from "./LpData";   // 背景設定用のデータをインポート
+import * as layouts from "./layouts"; // レイアウト関連のコンポーネントをインポート（ヘッダー、フッターなど）
+import type { Route } from "./+types/root"; // 型定義をインポート
+import "./app.css"; // グローバルCSSをインポート
+import { backgroundData } from "./LpData"; // 背景設定用のデータをインポート
 
 // アプリケーションの基本レイアウトを定義するコンポーネント
 export function Layout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="ja">
-            <layouts.Head /> {/* ヘッドセクション（メタタグ、タイトル、CSSリンクなど） */}
+            <layouts.Head />{" "}
+            {/* ヘッドセクション（メタタグ、タイトル、CSSリンクなど） */}
             {/* ボディセクション - 背景スタイルを適用 */}
-            <body 
+            <body
                 className={`
-                    min-h-screen 
+                    min-h-screen
+                    z-[-100]
                     ${backgroundData.backgroundColor} 
                     ${backgroundData.backgroundImage} 
                     ${backgroundData.backgroundAttachment} 
@@ -31,16 +31,20 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     ${backgroundData.backgroundRepeat}
                 `}
             >
-                <layouts.Header />     {/* ヘッダーコンポーネント - サイト上部に表示 */}
-                {children}             {/* メインコンテンツ部分 - 子コンポーネントが表示される */}
-                <layouts.Footer />     {/* フッターコンポーネント - サイト下部に表示 */}
-                <ScrollRestoration />  {/* スクロール位置を復元するコンポーネント */}
-                <Scripts />            {/* JavaScriptを読み込むコンポーネント */}
+                <layouts.Header />
+                {/* ヘッダーコンポーネント - サイト上部に表示 */}
+                <layouts.SideBanner /> {/* 固定バナーコンポーネントを表示 */}
+                {children}
+                {/* メインコンテンツ部分 - 子コンポーネントが表示される */}
+                <layouts.Footer />
+                {/* フッターコンポーネント - サイト下部に表示 */}
+                <ScrollRestoration />
+                {/* スクロール位置を復元するコンポーネント */}
+                <Scripts /> {/* JavaScriptを読み込むコンポーネント */}
             </body>
         </html>
     );
 }
-
 
 // ================================================================================================ //
 // アプリケーションのルートコンポーネント - React Routerのエントリーポイント

@@ -13,22 +13,57 @@ export default function Header() {
         // ヘッダー全体のスタイルを設定
         <header
             className={`
-                fixed top-0 left-0 w-full shadow-md z-[500]
+                fixed
+                top-0
+                left-0
+                w-full
+                z-[900]
+                mx-auto
+                shadow-md
                 ${headerData.find((item) => item.type === "header")?.background}
             `}
         >
-            {/* ヘッダーの中身を配置するためのコンテナ */}
-            <div className="flex justify-between items-center max-w-screen-xl mx-auto px-[5%] py-[0.5%]">
-                {/* 会社のロゴを表示 */}
-                <CompanyLogo />
-                {/* ナビゲーションメニュー */}
-                <nav>
-                    <ul className="flex items-center space-x-6 h-full max-h-[50px]">
+            <div className="
+                w-full
+                max-w-[1500px]
+                mx-auto
+                flex
+                justify-between
+                items-center
+                px-[5%]
+                max-[780px]:px-[3%]
+                py-[0.5%]
+                max-[780px]:py-[1%]
+            ">
+                {/* ヘッダーの中身を配置するためのコンテナ */}
+                <CompanyLogo /> {/* 会社のロゴを表示 */}
+                <nav
+                    className="
+                    w-[60%]
+                    max-w-[500px]
+                    max-[780px]:w-[40%]
+                    flex
+                    items-center
+                    justify-between
+                "
+                >
+                    {/* ナビゲーションメニュー */}
+                    <ul
+                        className="
+                    flex
+                    justify-between
+                    items-center
+                    h-auto
+                "
+                    >
                         {/* フィルタリングしたリンクデータを使ってリストアイテムを生成 */}
                         {linkData.map((item, index) => (
-                            <li 
+                            <li
                                 key={index}
                                 className={`
+                                    w-[32%]
+                                    max-[780px]:w-[30%]
+                                    hoverAction
                                     ${item.type === "link" ? "block" : ""}
                                 `}
                             >
@@ -37,31 +72,17 @@ export default function Header() {
                                     <picture>
                                         {/* スクリーンサイズに応じて異なる画像を表示 */}
                                         <source
-                                            srcSet={`images/${item.imageNameSp}`}
+                                            srcSet={`images/sp_icons/${item.imageNameSp}`}
                                             media="(max-width: 780px)"
                                         />
                                         {/* デフォルトの画像を表示 */}
-                                        <img
-                                            src={`images/${item.imageName}`}
-                                            alt={item.alt}
-                                        />
+                                        <img src={`images/${item.imageName}`} />
                                     </picture>
                                 </a>
                             </li>
                         ))}
                     </ul>
                 </nav>
-            </div>
-            {/* 固定バナーを表示するためのコンテナ */}
-            <div className="fixed bottom-0 left-0 w-full flex justify-between">
-                {/* 左側の固定バナー */}
-                <div className="fixed_banner01">
-                    <img src="image/side01.png" alt="" />
-                </div>
-                {/* 右側の固定バナー */}
-                <div className="fixed_banner02">
-                    <img src="image/side02.png" alt="" />
-                </div>
             </div>
         </header>
     );

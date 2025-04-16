@@ -1,5 +1,6 @@
 import React from "react";
 import { CtaData } from "../LpData";
+import { scrollToForm } from "../logics/scrollLogics";
 
 const ctaBg = CtaData.filter((cta) => cta.type === "bg");
 const ctaButton = CtaData.filter((cta) => cta.type === "button");
@@ -32,11 +33,13 @@ export default function Cta() {
                             bg-no-repeat
                             cursor-pointer
                             buttonAnimation
+                            transition-all
+                            duration-300
+                            ease-in-out
+                            hover:opacity-80
                             ${cta.position}
                         `}
-                        onClick={() => {
-                            document.querySelector("#from")?.scrollIntoView({ behavior: "smooth" });
-                        }}
+                        onClick={scrollToForm}
                     >
                         <img src={`/images/${cta.imageName}`} />
                     </button>
