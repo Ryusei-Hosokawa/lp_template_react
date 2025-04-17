@@ -1,5 +1,6 @@
 import React from "react";
 import { formData, companyInformation } from "../LpData";
+import { RequiredLabel } from "./form_ui";
 
 export default function ContactForm() {
     // formDataから各タイプのデータを取得
@@ -78,9 +79,7 @@ export default function ContactForm() {
                                 >
                                     {field.label}
                                     {field.required && (
-                                        <span className="text-red-500 ml-[10px]">
-                                            必須
-                                        </span>
+                                        <RequiredLabel />
                                     )}
                                 </label>
                                 <input
@@ -90,6 +89,8 @@ export default function ContactForm() {
                                     className="border border-gray-300 p-2 rounded-[8px]"
                                     placeholder=""
                                     required={field.required}
+                                    onInvalid={(e) => e.currentTarget.setCustomValidity('この欄が未入力です')}
+                                    onInput={(e) => e.currentTarget.setCustomValidity('')}
                                 />
                             </div>
                         ))}
@@ -120,7 +121,7 @@ export default function ContactForm() {
                     />
                     <p className="font-[700] text-[16px] mb-[8px]">
                         個人情報の取り扱いについて
-                        <span className="text-red-500 ml-[10px]">必須</span>
+                        <RequiredLabel />
                     </p>
                     <div
                         className="
@@ -175,6 +176,8 @@ export default function ContactForm() {
                             name="privacy"
                             value="同意する"
                             required
+                            onInvalid={(e) => e.currentTarget.setCustomValidity('この欄が未入力です')}
+                            onInput={(e) => e.currentTarget.setCustomValidity('')}
                         />
                         <p className="max-[780px]:text-[14px]">
                             <span className="mr-[-5px]">
@@ -186,7 +189,7 @@ export default function ContactForm() {
                     <div className="flex justify-center">
                         <input
                             className="
-                                bg-[#4690ff]
+                                bg-[#5e9efe]
                                 text-white
                                 text-center
                                 min-w-[150px]

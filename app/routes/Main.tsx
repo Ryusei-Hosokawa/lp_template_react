@@ -1,6 +1,7 @@
 import React from "react";
 import { imageData } from "../LpData";
 import { Cta, ContactForm, CompanyInfo } from "../components";
+import SideBanner from "../layouts/sidebanner/SideBanner";
 import { useHeaderResizeEffect } from "../logics/headerResizeObserver";
 
 export default function Main() {
@@ -14,31 +15,34 @@ export default function Main() {
     );
 
     return (
-        <main
-            className={`
+        <main className="relative w-full">
+            {/* <SideBanner /> */}
+            <div
+                className={`
                 mx-auto
                 drop-shadow-[0_0_10px_rgba(0,0,0,0.3)]
                 ${imageData.mainWidth}
             `}
-        >
-            <div className="h-[auto]">
-                {imageNumbers.map((imageNumber) => {
-                    // 画像ファイル名は1から始まるので、そのまま使用
-                    return (
-                        <React.Fragment key={imageNumber}>
-                            <img
-                                src={`/images/img_${imageNumber}.${imageData.extension}`}
-                                className="w-full"
-                            />
-                            {!imageData.ctaButton.includes(imageNumber) && (
-                                <Cta />
-                            )}
-                        </React.Fragment>
-                    );
-                })}
+            >
+                <div className="h-[auto]">
+                    {imageNumbers.map((imageNumber) => {
+                        // 画像ファイル名は1から始まるので、そのまま使用
+                        return (
+                            <React.Fragment key={imageNumber}>
+                                <img
+                                    src={`/images/img_${imageNumber}.${imageData.extension}`}
+                                    className="w-full"
+                                />
+                                {!imageData.ctaButton.includes(imageNumber) && (
+                                    <Cta />
+                                )}
+                            </React.Fragment>
+                        );
+                    })}
+                </div>
+                <ContactForm /> {/* フォーム内容 */}
+                <CompanyInfo /> {/* 会社概要 */}
             </div>
-            <ContactForm /> {/* フォーム内容 */}
-            <CompanyInfo /> {/* 会社概要 */}
         </main>
     );
 }

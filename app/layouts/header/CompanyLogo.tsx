@@ -11,6 +11,7 @@ export default function CompanyLogo() {
                 .map((logoData, index) => (
                     <h1
                         className={`
+                            hoverAction
                             ${logoData.logoWidth}
                             ${logoData.logoMaxWidth}
                             ${logoData.logoWidthSp}

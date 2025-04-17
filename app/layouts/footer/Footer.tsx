@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 export default function Footer() {
     return (
-        <footer className="bg-gray-800 text-white py-[100px]">
+        <footer className="sticky top-full bg-gray-800 text-white py-[100px]">
             <div className="max-w-screen-xl mx-auto px-4">
                 <div className="flex flex-col items-center">
                     <ul className="
@@ -31,7 +31,9 @@ export default function Footer() {
                             </Link>
                         </li>
                     </ul>
-                    <small className="text-[12px] text-[#c9c9c9] font-[300]">Copyright © 株式会社和田板金工業 All rights reserved.</small>
+                    <small className="text-[12px] text-[#c9c9c9] font-[300]">
+                        Copyright © {companyInformation.name} All rights reserved.
+                    </small>
                 </div>
             </div>
         </footer>

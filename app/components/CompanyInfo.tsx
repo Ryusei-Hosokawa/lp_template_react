@@ -1,4 +1,5 @@
 import React from "react";
+import { RequiredLabel } from "./form_ui";
 
 export default function CompanyInfo() {
     const companyData = [
@@ -9,7 +10,7 @@ export default function CompanyInfo() {
                 <>
                     年齢・学歴：不問
                     <br />
-                    <span className="text-red-500">【必須】</span>
+                    <RequiredLabel />
                     運転免許・初任者研修修了者（旧ヘルパー2級）以上
                 </>
             ),
@@ -49,13 +50,19 @@ export default function CompanyInfo() {
                     w-full
                     text-left
                     mb-[20px]
-                    overflow-hidden
-                    rounded-[8px]
                     bg-[#fff]
-                    border 
-                    border-gray-300
-                ">
-                    <tbody>
+                    
+                    ">
+                    <tbody
+                        className="
+                            block
+                            border-b
+                            border 
+                            border-gray-300
+                            rounded-[8px]
+                            overflow-hidden
+                        "
+                    >
                         {companyData.map((item, index) => (
                             <tr key={index} className="border-b border-gray-200 last:border-b-0">
                                 <th className="w-1/3 py-4 px-6 font-normal text-center border-r border-gray-200 bg-gray-50">

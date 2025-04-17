@@ -33,7 +33,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
             >
                 <layouts.Header />
                 {/* ヘッダーコンポーネント - サイト上部に表示 */}
-                <layouts.SideBanner /> {/* 固定バナーコンポーネントを表示 */}
                 {children}
                 {/* メインコンテンツ部分 - 子コンポーネントが表示される */}
                 <layouts.Footer />

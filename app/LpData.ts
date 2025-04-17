@@ -1,7 +1,6 @@
 // 会社情報 ここから //
 export const companyInformation = {
-        type: "company", // ※基本触らない
-        name: "株式会社和田板金工業", // 会社名
+        name: "Answer Smile 株式会社", // 会社名
         address: "〒000-0000 東京都千代田区千代田1-1-1", // 郵便番号と住所
         tel: "000-0000-0000", // 電話番号
         mail: "info@example.com", // メールアドレス
