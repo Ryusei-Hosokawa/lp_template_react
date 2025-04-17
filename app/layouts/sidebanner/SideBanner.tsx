@@ -1,5 +1,6 @@
 import React from "react";
 import { sideData } from "../../LpData";
+import { Image } from "../../components";
 
 /**
  * サイドバナーコンポーネント
@@ -29,7 +30,7 @@ export default function SideBanner() {
                         ${side.position}
                     `}
                 >
-                    <img src={`images/${side.imageName}`} />
+                    <Image src={`${side.imageName}`} />
                 </div>
             ))}
         </div>

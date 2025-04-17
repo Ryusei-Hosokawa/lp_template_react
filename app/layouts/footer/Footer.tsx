@@ -14,21 +14,21 @@ export default function Footer() {
                         mb-[20px]
                     ">
                         <li>
-                            <Link
-                                to="/about"
+                            <a
+                                href="about"
                                 className="hover:text-gray-300 transition-colors"
                             >
                                 会社概要
-                            </Link>
+                            </a>
                         </li>
                         <span className="mx-[10px]">|</span>
                         <li>
-                            <Link
-                                to="/privacy_policy"
+                            <a
+                                href="privacy_policy"
                                 className="hover:text-gray-300 transition-colors"
                             >
                                 プライバシーポリシー
-                            </Link>
+                            </a>
                         </li>
                     </ul>
                     <small className="text-[12px] text-[#c9c9c9] font-[300]">

@@ -8,12 +8,20 @@ export const companyInformation = {
     };
 // 会社情報 ここまで //
 
+// meta情報 ここから //
+export const metaInformation = {
+    title: "Answer Smile 株式会社", // metaデータで設定するタイトル
+    description: "Answer Smile 株式会社のホームページです。", // metaデータで設定するディスクリプション
+    keywords: "Answer Smile, 株式会社, ホームページ", // metaデータで設定するキーワード
+}
+// meta情報 ここまで //
+
 // ヘッダー画像系の情報 ここから //
 export const headerData = [
     // 会社ロゴ ここから //
     {
         type: "logo", // ※基本触らない
-        link: "/", // リンク先
+        link: "./", // リンク先
         imageName: "logo.png", // 画像名
         logoWidth: "w-[20vw]",
         logoMaxWidth: "max-w-[200px]",
@@ -23,7 +31,7 @@ export const headerData = [
     // LINEの画像 ここから //
     {
         type: "line", // ※基本触らない
-        link: "https://lin.ee/ag7rh", // リンク先
+        link: "https://www.line.me/ja/", // リンク先
         imageName: "line_pc.png", // 画像名
         imageNameSp: "line_sp.svg", // スマホの画像名
     },
@@ -31,7 +39,6 @@ export const headerData = [
     // メールの画像 ここから //
     {
         type: "mail", // ※基本触らない
-        link: "#form", // リンク先
         imageName: "mail_pc.png", // 画像名
         imageNameSp: "mail_sp.svg", // スマホの画像名
     },
@@ -56,10 +63,9 @@ export const headerData = [
 
 // メイン画像の情報 ここから //
 export const imageData = {
-    mainWidth: "max-w-[470px]",
+    mainWidth: "max-w-[500px]",
     imageItem: 10, // メインコンテンツ内に並べる画像の数
     ctaButton: [9, 10], // これらの番号の画像の下にはCTAボタンを表示しない
-    extension: "jpg", // 拡張子の種類
 };
 // メイン画像の情報 ここまで //
 
@@ -117,15 +123,32 @@ export const formData = [
 // フォームの情報 ここまで //
 
 // 背景設定の情報 ここから //
-export const backgroundData = {
-    type: "background", // ※基本触らない
-    backgroundColor: "bg-[#fff]", // 背景色
-    backgroundImage: "bg-[url('/images/bg.jpg')]", // 背景画像を使用する場合
-    backgroundAttachment: "bg-fixed", // 背景固定
-    backgroundSize: "bg-[50%_auto]", // 背景サイズ
-    backgroundRepeat: "bg-repeat", // 背景繰り返し
-    backgroundPosition: "bg-center", // 背景位置
-};
+export const backgroundData = [
+    {// 左側背景 ここから //
+        type: "left", // ※基本触らない
+        backgroundLeft: "bg-[url('images/bg_left.jpg')]", // 背景画像を使用する場合
+        backgroundAttachmentLeft: "bg-fixed", // 背景固定
+        backgroundSizeLeft: "bg-[auto_100%]", // 左側背景サイズ
+        backgroundRepeatLeft: "bg-no-repeat", // 左側背景繰り返し
+        backgroundPositionLeft: "bg-left", // 左側背景位置
+    },// 左側背景 ここまで //
+    {// 右側背景 ここから //
+        type: "right", // ※基本触らない
+        backgroundRight: "bg-[url('images/bg_right.jpg')]", // 背景画像を使用する場合
+        backgroundAttachmentRight: "bg-fixed", // 背景固定
+        backgroundSizeRight: "bg-[100%]", // 右側背景サイズ
+        backgroundRepeatRight: "bg-no-repeat", // 右側背景繰り返し
+        backgroundPositionRight: "bg-right", // 右側背景位置
+    },// 右側背景 ここまで //
+    {// プライバシーポリシーと会社概要ページの背景画像 ここから //
+        type: "other", // ※基本触らない
+        backgroundOther: "bg-[url('images/bg_right.jpg')]", // 背景画像を使用する場合
+        backgroundAttachmentOther: "bg-fixed", // 背景固定
+        backgroundSizeOther: "bg-[100%]", // 背景サイズ
+        backgroundRepeatOther: "bg-no-repeat", // 背景繰り返し
+        backgroundPositionOther: "bg-center", // 背景位置
+    },// プライバシーポリシーと会社概要ページの背景画像 ここまで //
+]
 // 背景設定の情報 ここまで //
 
 // サイド固定バナーの情報 ここから //

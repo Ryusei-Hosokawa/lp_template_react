@@ -11,7 +11,7 @@ import {
 import * as layouts from "./layouts"; // レイアウト関連のコンポーネントをインポート（ヘッダー、フッターなど）
 import type { Route } from "./+types/root"; // 型定義をインポート
 import "./app.css"; // グローバルCSSをインポート
-import { backgroundData } from "./LpData"; // 背景設定用のデータをインポート
+import MainBackground from "./components/MainBackground"; // 背景設定用のコンポーネントをインポート
 import { useHeaderResizeEffect } from "./logics/headerResizeObserver"; // ヘッダーのリサイズ監視
 
 // アプリケーションの基本レイアウトを定義するコンポーネント
@@ -37,18 +37,26 @@ export function Layout({ children }: { children: React.ReactNode }) {
             {/* ボディセクション - 背景スタイルを適用 */}
             <body
                 className={`
+                    relative
                     min-h-screen
                     z-[-100]
-                    ${backgroundData.backgroundColor} 
-                    ${backgroundData.backgroundImage} 
-                    ${backgroundData.backgroundAttachment} 
-                    ${backgroundData.backgroundSize} 
-                    ${backgroundData.backgroundPosition} 
-                    ${backgroundData.backgroundRepeat}
                 `}
             >
+                <MainBackground />
                 <layouts.Header />
                 {/* ヘッダーコンポーネント - サイト上部に表示 */}
+                <noscript>
+                    <div style={{ 
+                        padding: '20px', 
+                        textAlign: 'center', 
+                        backgroundColor: '#ffeeee',
+                        border: '1px solid #ff0000',
+                        margin: '20px'
+                    }}>
+                        <p>このサイトはJavaScriptを有効にする必要があります。</p>
+                        <p>Please enable JavaScript to view this website properly.</p>
+                    </div>
+                </noscript>
                 {children}
                 {/* メインコンテンツ部分 - 子コンポーネントが表示される */}
                 <layouts.Footer />

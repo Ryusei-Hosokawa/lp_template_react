@@ -1,6 +1,7 @@
 import React from "react";
 import { headerData } from "../../LpData";
 import * as ReactRouter from "react-router";
+import { Image } from "../../components";
 const { Link } = ReactRouter;
 
 export default function CompanyLogo() {
@@ -10,6 +11,7 @@ export default function CompanyLogo() {
                 .filter((item) => item.type === "logo")
                 .map((logoData, index) => (
                     <h1
+                        key={index}
                         className={`
                             hoverAction
                             ${logoData.logoWidth}
@@ -17,14 +19,11 @@ export default function CompanyLogo() {
                             ${logoData.logoWidthSp}
                         `}
                     >
-                        <Link to="/" key={index}>
-                            <img
-                            src={`/images/${logoData.imageName}`}
-                            className="w-full"
-                        />
-                    </Link>
-                </h1>
-            ))}
+                        <Link to={`${logoData.link}`}>
+                            <Image src={`${logoData.imageName}`} />
+                        </Link>
+                    </h1>
+                ))}
         </>
     );
 }

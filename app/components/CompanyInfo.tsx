@@ -10,8 +10,7 @@ export default function CompanyInfo() {
                 <>
                     年齢・学歴：不問
                     <br />
-                    <RequiredLabel />
-                    運転免許・初任者研修修了者（旧ヘルパー2級）以上
+                    <span className="text-[#222]">必須 : </span>運転免許・初任者研修修了者（旧ヘルパー2級）以上
                 </>
             ),
         },
@@ -23,7 +22,7 @@ export default function CompanyInfo() {
                     <br />
                     千葉県柏市豊四季台1-1-47
                 </>
-            )
+            ),
         },
         { label: "連絡先", content: "【TEL】070-2174-8041" },
     ];
@@ -45,14 +44,16 @@ export default function CompanyInfo() {
                 bg-[#fff]
                 shadow-[0_0_10px_0_rgba(0,0,0,0.2)]
                 "
-                >
-                <table className="
+            >
+                <table
+                    className="
                     w-full
                     text-left
                     mb-[20px]
                     bg-[#fff]
                     
-                    ">
+                    "
+                >
                     <tbody
                         className="
                             block
@@ -64,7 +65,10 @@ export default function CompanyInfo() {
                         "
                     >
                         {companyData.map((item, index) => (
-                            <tr key={index} className="border-b border-gray-200 last:border-b-0">
+                            <tr
+                                key={index}
+                                className="border-b border-gray-200 last:border-b-0"
+                            >
                                 <th className="w-1/3 py-4 px-6 font-normal text-center border-r border-gray-200 bg-gray-50">
                                     {item.label}
                                 </th>

@@ -1,6 +1,6 @@
 import React from "react";
 import { imageData } from "../LpData";
-import { Cta, ContactForm, CompanyInfo } from "../components";
+import { Cta, ContactForm, CompanyInfo, Image } from "../components";
 import SideBanner from "../layouts/sidebanner/SideBanner";
 import { useHeaderResizeEffect } from "../logics/headerResizeObserver";
 
@@ -29,10 +29,9 @@ export default function Main() {
                         // 画像ファイル名は1から始まるので、そのまま使用
                         return (
                             <React.Fragment key={imageNumber}>
-                                <img
-                                    src={`/images/img_${imageNumber}.${imageData.extension}`}
-                                    className="w-full"
-                                />
+                                <div className="w-full">
+                                    <img src={`images/img_${imageNumber}.jpg`} alt={`メイン画像 ${imageNumber}`} className="w-full" />
+                                </div>
                                 {!imageData.ctaButton.includes(imageNumber) && (
                                     <Cta />
                                 )}

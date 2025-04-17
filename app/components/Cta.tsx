@@ -1,6 +1,7 @@
 import React from "react";
 import { CtaData } from "../LpData";
 import { scrollToForm } from "../logics/scrollLogics";
+import { Image } from "./Image";
 
 const ctaBg = CtaData.filter((cta) => cta.type === "bg");
 const ctaButton = CtaData.filter((cta) => cta.type === "button");
@@ -10,16 +11,21 @@ export default function Cta() {
         <div className="relative">
             {ctaBg.map((cta) => {
                 return (
-                    <img
-                        key={cta.imageName}
-                        src={`/images/${cta.imageName}`}
-                        className="inline-block"
-                    />
+                    <div key={cta.imageName} className="w-full">
+                        <Image 
+                            className="
+                                w-full
+                                inline-block
+                            " 
+                            src={`${cta.imageName}`} 
+                        />
+                    </div>
                 );
             })}
             {ctaButton.map((cta) => {
                 return (
                     <button
+                        key={cta.imageName}
                         className={`
                             block
                             absolute
@@ -41,7 +47,7 @@ export default function Cta() {
                         `}
                         onClick={scrollToForm}
                     >
-                        <img src={`/images/${cta.imageName}`} />
+                        <img src={`images/${cta.imageName}`} alt="CTAボタン" className="w-full" />
                     </button>
                 );
             })}

@@ -9,7 +9,7 @@ import { handleButtonClick } from "../../logics/buttonActions"; // ボタンア�
 export default function Header() {
     // headerDataからリンクタイプのデータだけをフィルタリングして取得
     const linkData = headerData.filter((item) =>
-        ["line", "mail", "tel"].includes(item.type)
+        ["line", "mail", "tel", "link"].includes(item.type)
     );
 
     // ヘッダーのJSXを返す
@@ -70,7 +70,7 @@ export default function Header() {
                                     w-[32%]
                                     max-[780px]:w-[30%]
                                     hoverAction
-                                    ${[ "line", "mail", "tel" ].includes( item.type ) ? "block" : "" }
+                                    ${[ "line", "mail", "tel", "link" ].includes( item.type ) ? "block" : "" }
                                 `}
                             >
                                 {/* リンクを表示 */}
