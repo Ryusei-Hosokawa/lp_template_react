@@ -1,12 +1,16 @@
 // ヘッダーに必要なデータとコンポーネントをインポート
 import React from "react";
 import { headerData } from "../../LpData"; // ヘッダーに表示するデータをインポート
-import { CompanyLogo } from "../index"; // 会社のロゴを表示するコンポーネントをインポート
+import { CompanyLogo, Tel } from "./index"; // 会社のロゴと電話ボタンコンポーネントをインポート
+import { scrollToForm } from "../../logics/scrollLogics"; // スクロール関連のロジック
+import { handleButtonClick } from "../../logics/buttonActions"; // ボタンアクション関連のロジック
 
 // Headerコンポーネントを定義
 export default function Header() {
     // headerDataからリンクタイプのデータだけをフィルタリングして取得
-    const linkData = headerData.filter((item) => item.type === "link");
+    const linkData = headerData.filter((item) =>
+        ["line", "mail", "tel"].includes(item.type)
+    );
 
     // ヘッダーのJSXを返す
     return (
@@ -17,44 +21,46 @@ export default function Header() {
                 top-0
                 left-0
                 w-full
-                z-[900]
+                z-[999]
                 mx-auto
                 shadow-md
                 ${headerData.find((item) => item.type === "header")?.background}
             `}
         >
-            <div className="
-                w-full
-                max-w-[1500px]
-                mx-auto
-                flex
-                justify-between
-                items-center
-                px-[5%]
-                max-[780px]:px-[3%]
-                py-[0.5%]
-                max-[780px]:py-[1%]
-            ">
+            <div
+                className="
+                    w-full
+                    max-w-[1500px]
+                    mx-auto
+                    flex
+                    justify-between
+                    items-center
+                    px-[5%]
+                    max-[780px]:px-[3%]
+                    py-[0.5%]
+                    max-[780px]:py-[1%]
+                "
+            >
                 {/* ヘッダーの中身を配置するためのコンテナ */}
                 <CompanyLogo /> {/* 会社のロゴを表示 */}
                 <nav
                     className="
-                    w-[60%]
-                    max-w-[500px]
-                    max-[780px]:w-[40%]
-                    flex
-                    items-center
-                    justify-between
-                "
+                        w-[60%]
+                        max-w-[500px]
+                        max-[780px]:w-[40%]
+                        flex
+                        items-center
+                        justify-between
+                    "
                 >
                     {/* ナビゲーションメニュー */}
                     <ul
                         className="
-                    flex
-                    justify-between
-                    items-center
-                    h-auto
-                "
+                        flex
+                        justify-between
+                        items-center
+                        h-auto
+                    "
                     >
                         {/* フィルタリングしたリンクデータを使ってリストアイテムを生成 */}
                         {linkData.map((item, index) => (
@@ -64,21 +70,35 @@ export default function Header() {
                                     w-[32%]
                                     max-[780px]:w-[30%]
                                     hoverAction
-                                    ${item.type === "link" ? "block" : ""}
+                                    ${[ "line", "mail", "tel" ].includes( item.type ) ? "block" : "" }
                                 `}
                             >
                                 {/* リンクを表示 */}
-                                <a href={item.link} className="block h-auto">
-                                    <picture>
-                                        {/* スクリーンサイズに応じて異なる画像を表示 */}
-                                        <source
-                                            srcSet={`images/sp_icons/${item.imageNameSp}`}
-                                            media="(max-width: 780px)"
+                                <button
+                                    onClick={() => handleButtonClick(item.type, item.link)}
+                                    className="block h-auto bg-transparent border-0 p-0 cursor-pointer w-full"
+                                >
+                                    {item.type !== "tel" ? (
+                                        <picture>
+                                            {/* スクリーンサイズに応じて異なる画像を表示 */}
+                                            <source
+                                                srcSet={`images/sp_icons/${item.imageNameSp}`}
+                                                media="(max-width: 780px)"
+                                            />
+                                            {/* デフォルトの画像を表示 */}
+                                            <img
+                                                src={`images/${item.imageName}`}
+                                            />
+                                        </picture>
+                                    ) : (
+                                        <Tel
+                                            link={item.link}
+                                            imageName={item.imageName}
+                                            imageNameSp={item.imageNameSp}
+                                            imageUse={item.imageUse || false}
                                         />
-                                        {/* デフォルトの画像を表示 */}
-                                        <img src={`images/${item.imageName}`} />
-                                    </picture>
-                                </a>
+                                    )}
+                                </button>
                             </li>
                         ))}
                     </ul>

@@ -2,21 +2,32 @@
  * ヘッダーの高さを監視し、メインコンテンツのマージンを動的に調整するロジック
  */
 
+// 監視オブジェクトをグローバルに保持
+let resizeObserver: ResizeObserver | null = null;
+let mutationObserver: MutationObserver | null = null;
+
 // ヘッダー要素とメインコンテンツの要素を監視するための関数
 export function observeHeaderHeight() {
+    // 以前のObserverをクリーンアップ
+    cleanupObservers();
+    
     const initObserver = () => {
         // 監視対象のヘッダー要素を取得（より具体的なセレクタを使用）
         const header = document.querySelector("body > header");
         // メインコンテンツを取得
         const main = document.querySelector("main");
 
-        if (!header || !main) return;
+        if (!header || !main) {
+            // 要素が見つからない場合は少し遅延して再試行
+            setTimeout(initObserver, 50);
+            return;
+        }
 
         // 初期設定：現在のヘッダーの高さでメインコンテンツのマージンを設定
         updateMainMargin(header, main);
 
         // ResizeObserverを使用してヘッダーの高さ変更を監視
-        const resizeObserver = new ResizeObserver(() => {
+        resizeObserver = new ResizeObserver(() => {
             updateMainMargin(header, main);
         });
 
@@ -24,13 +35,11 @@ export function observeHeaderHeight() {
         resizeObserver.observe(header);
 
         // ウィンドウのリサイズも監視
-        window.addEventListener("resize", () => {
-            updateMainMargin(header, main);
-        });
+        window.addEventListener("resize", handleResize);
         
         // DOM変更の監視（ヘッダーの内容が動的に変更される場合）
         if (window.MutationObserver) {
-            const mutationObserver = new MutationObserver(() => {
+            mutationObserver = new MutationObserver(() => {
                 updateMainMargin(header, main);
             });
             
@@ -39,6 +48,16 @@ export function observeHeaderHeight() {
                 childList: true,
                 subtree: true
             });
+        }
+    };
+
+    // リサイズイベントハンドラ
+    const handleResize = () => {
+        const header = document.querySelector("body > header");
+        const main = document.querySelector("main");
+        
+        if (header && main) {
+            updateMainMargin(header, main);
         }
     };
 
@@ -54,16 +73,48 @@ export function observeHeaderHeight() {
     window.addEventListener("load", initObserver);
 }
 
+// 以前のObserverをクリーンアップする関数
+function cleanupObservers() {
+    if (resizeObserver) {
+        resizeObserver.disconnect();
+        resizeObserver = null;
+    }
+    
+    if (mutationObserver) {
+        mutationObserver.disconnect();
+        mutationObserver = null;
+    }
+    
+    // リサイズイベントリスナーを削除
+    window.removeEventListener("resize", handleResize);
+}
+
+// リサイズイベントハンドラ（グローバルスコープに移動）
+function handleResize() {
+    const header = document.querySelector("body > header");
+    const main = document.querySelector("main");
+    
+    if (header && main) {
+        updateMainMargin(header, main);
+    }
+}
+
 // メインコンテンツのマージンをヘッダーの高さに合わせて更新する関数
 function updateMainMargin(header: Element, main: Element) {
     const headerHeight = header.getBoundingClientRect().height;
     (main as HTMLElement).style.marginTop = `${headerHeight}px`;
 }
 
-// コンポーネント内で使用するためのカスタムフック
+// ReactのuseEffect内で使用するためのカスタムフック
 export function useHeaderResizeEffect() {
     if (typeof window !== "undefined") {
         // クライアントサイドでのみ実行
         observeHeaderHeight();
+        
+        // クリーンアップ関数を返す
+        return () => {
+            cleanupObservers();
+        };
     }
+    return undefined;
 }

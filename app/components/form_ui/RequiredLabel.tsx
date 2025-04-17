@@ -6,13 +6,15 @@ import React from "react";
 export default function RequiredLabel() {
     return (
         <span className="
-            bg-[#de0000]
-            text-[12px]
-            text-[#fff]
+            inline-block
+            leading-[0.9em]
             px-[10px]
             py-[4px]
             ml-[5px]
             rounded-full
+            text-[12px]
+            text-[#fff]
+            bg-[#de0000]
         ">
             必須
         </span>

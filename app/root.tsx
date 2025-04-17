@@ -1,19 +1,35 @@
 // Reactライブラリをインポート - UIコンポーネントの作成に必要
-import React from "react";
+import React, { useEffect } from "react";
 // React Routerからルーティング関連の機能をインポート
 import {
     isRouteErrorResponse, // エラーレスポンスかどうかを判定する関数
     Outlet, // 子ルートのコンポーネントを表示する場所を指定
     Scripts, // JavaScriptを読み込むためのコンポーネント
     ScrollRestoration, // ページ遷移時のスクロール位置を復元するコンポーネント
+    useLocation, // 現在のURLロケーションを取得するフック
 } from "react-router";
 import * as layouts from "./layouts"; // レイアウト関連のコンポーネントをインポート（ヘッダー、フッターなど）
 import type { Route } from "./+types/root"; // 型定義をインポート
 import "./app.css"; // グローバルCSSをインポート
 import { backgroundData } from "./LpData"; // 背景設定用のデータをインポート
+import { useHeaderResizeEffect } from "./logics/headerResizeObserver"; // ヘッダーのリサイズ監視
 
 // アプリケーションの基本レイアウトを定義するコンポーネント
 export function Layout({ children }: { children: React.ReactNode }) {
+    // 現在のロケーションを取得
+    const location = useLocation();
+    
+    // ロケーションが変わるたびにヘッダーのリサイズ監視を再設定
+    useEffect(() => {
+        // ヘッダーのリサイズを監視する
+        const cleanup = useHeaderResizeEffect();
+        
+        return () => {
+            // コンポーネントがアンマウントされるときにクリーンアップ
+            if (cleanup) cleanup();
+        };
+    }, [location.pathname]); // URLが変わるたびに再実行
+    
     return (
         <html lang="ja">
             <layouts.Head />{" "}

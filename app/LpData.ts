@@ -22,7 +22,7 @@ export const headerData = [
     // 会社ロゴ ここまで //
     // LINEの画像 ここから //
     {
-        type: "link", // ※基本触らない
+        type: "line", // ※基本触らない
         link: "https://lin.ee/ag7rh", // リンク先
         imageName: "line_pc.png", // 画像名
         imageNameSp: "line_sp.svg", // スマホの画像名
@@ -30,7 +30,7 @@ export const headerData = [
     // LINEの画像 ここまで //
     // メールの画像 ここから //
     {
-        type: "link", // ※基本触らない
+        type: "mail", // ※基本触らない
         link: "#form", // リンク先
         imageName: "mail_pc.png", // 画像名
         imageNameSp: "mail_sp.svg", // スマホの画像名
@@ -38,11 +38,11 @@ export const headerData = [
     // メールの画像 ここまで //
     // 電話の画像 ここから //
     {
-        type: "link", // ※基本触らない
-        link: "tel:000-0000-0000", // リンク先
+        type: "tel", // ※基本触らない
+        link: `${companyInformation.tel}`, // リンク先 もし会社概要の番号問違う場合はここを変更
         imageName: "tel_pc.svg", // 画像名
         imageNameSp: "tel_sp.svg", // スマホの画像名
-        use: false, // 画像を使用したいときのみ「true」
+        imageUse: false, // 画像を使用したいときのみ「true」
     },
     // 電話の画像 ここまで //
     // ヘッダーバックグラウンド ここから //
@@ -144,3 +144,7 @@ export const sideData = [
     },
 ];
 // サイド固定バナーの情報 ここまで //
+
+// シャドウ変更
+// フォームロゴの要素内外配置
+// 背景2枚
