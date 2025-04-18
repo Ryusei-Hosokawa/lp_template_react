@@ -3,6 +3,7 @@
  */
 import { headerData } from "../LpData";
 import { scrollToForm } from "./scrollLogics";
+import { findItemByType } from "./headerItemTypeFilter";
 
 /**
  * 安全に新しいタブでURLを開く関数
@@ -26,7 +27,7 @@ function safeOpenInNewTab(url: string): void {
  */
 export function handleButtonClick(type: string, link?: string): void {
     // headerDataからタイプを取得
-    const headerItem = headerData.find(item => item.type === type);
+    const headerItem = findItemByType(headerData.items, type);
     
     switch (type) {
         case "line":
