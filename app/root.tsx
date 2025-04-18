@@ -1,5 +1,5 @@
 // Reactライブラリをインポート - UIコンポーネントの作成に必要
-import React, { useEffect } from "react";
+import React, { useEffect, memo } from "react";
 // React Routerからルーティング関連の機能をインポート
 import {
     isRouteErrorResponse, // エラーレスポンスかどうかを判定する関数
@@ -7,19 +7,48 @@ import {
     Scripts, // JavaScriptを読み込むためのコンポーネント
     ScrollRestoration, // ページ遷移時のスクロール位置を復元するコンポーネント
     useLocation, // 現在のURLロケーションを取得するフック
+    Meta,
+    Links,
 } from "react-router";
 import * as layouts from "./layouts"; // レイアウト関連のコンポーネントをインポート（ヘッダー、フッターなど）
 import type { Route } from "./+types/root"; // 型定義をインポート
 import "./app.css"; // グローバルCSSをインポート
 import MainBackground from "./components/MainBackground"; // 背景設定用のコンポーネントをインポート
 import { useHeaderResizeEffect } from "./logics/headerResizeObserver"; // ヘッダーのリサイズ監視
+import { fontLinks } from "./layouts/head/fontLinks";
 
-// アプリケーションの基本レイアウトを定義するコンポーネント
-export function Layout({ children }: { children: React.ReactNode }) {
-    // 現在のロケーションを取得
+// フォントリンクをエクスポート
+export const links: Route.LinksFunction = () => [
+    ...fontLinks(),
+];
+
+// メモ化されたヘッドコンポーネント - 再レンダリングを防止
+const MemoizedHead = memo(function Head() {
+    return (
+        <head>
+            <meta charSet="utf-8" />
+            <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1"
+            />
+            <Meta />
+            <Links />
+        </head>
+    );
+});
+
+// メモ化されたヘッダーコンポーネント - 再レンダリングを防止
+const MemoizedHeader = memo(layouts.Header);
+
+// メモ化されたフッターコンポーネント - 再レンダリングを防止
+const MemoizedFooter = memo(layouts.Footer);
+
+// アプリケーションのルートコンポーネント - React Routerのエントリーポイント
+export default function App() {
+    // ロケーションの変更を監視
     const location = useLocation();
     
-    // ロケーションが変わるたびにヘッダーのリサイズ監視を再設定
+    // ヘッダーのリサイズ監視（ページ遷移時にのみ再実行）
     useEffect(() => {
         // ヘッダーのリサイズを監視する
         const cleanup = useHeaderResizeEffect();
@@ -29,12 +58,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
             if (cleanup) cleanup();
         };
     }, [location.pathname]); // URLが変わるたびに再実行
-    
+
+    // Layoutは1回だけレンダリングされ、内部のOutletだけがページ遷移時に変更される
     return (
         <html lang="ja">
-            <layouts.Head />{" "}
-            {/* ヘッドセクション（メタタグ、タイトル、CSSリンクなど） */}
-            {/* ボディセクション - 背景スタイルを適用 */}
+            <MemoizedHead />
             <body
                 className={`
                     relative
@@ -43,8 +71,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 `}
             >
                 <MainBackground />
-                <layouts.Header />
-                {/* ヘッダーコンポーネント - サイト上部に表示 */}
+                <MemoizedHeader />
                 <noscript>
                     <div style={{ 
                         padding: '20px', 
@@ -57,25 +84,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
                         <p>Please enable JavaScript to view this website properly.</p>
                     </div>
                 </noscript>
-                {children}
-                {/* メインコンテンツ部分 - 子コンポーネントが表示される */}
-                <layouts.Footer />
-                {/* フッターコンポーネント - サイト下部に表示 */}
+                
+                {/* Outletのみがページ遷移時に変更される */}
+                <Outlet />
+                
+                <MemoizedFooter />
                 <ScrollRestoration />
-                {/* スクロール位置を復元するコンポーネント */}
-                <Scripts /> {/* JavaScriptを読み込むコンポーネント */}
+                <Scripts />
             </body>
         </html>
     );
 }
-
-// ================================================================================================ //
-// アプリケーションのルートコンポーネント - React Routerのエントリーポイント
-export default function App() {
-    // Outletは現在のルートに一致する子ルートを表示する場所
-    return <Outlet />;
-}
-// ================================================================================================ //
 
 // ================================================================================================ //
 // エラー発生時に表示されるコンポーネント

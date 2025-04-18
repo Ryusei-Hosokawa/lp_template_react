@@ -5,7 +5,6 @@ export type ImageProps = {
     className?: string; /* 追加のクラス */
     key?: string; // 画像のキー
 }
-
 export const Image: React.FC<ImageProps> = ({
     src,
     className = "w-full",

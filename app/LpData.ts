@@ -63,7 +63,7 @@ export const headerData = [
 
 // メイン画像の情報 ここから //
 export const imageData = {
-    mainWidth: "max-w-[500px]",
+    mainWidth: "max-w-[660px]",
     imageItem: 10, // メインコンテンツ内に並べる画像の数
     ctaButton: [9, 10], // これらの番号の画像の下にはCTAボタンを表示しない
 };

@@ -1,11 +1,6 @@
 import React from "react";
 import type { Route } from "../../+types/root";
 import { Links, Meta } from "react-router";
-import { fontLinks } from "./fontLinks";
-
-export const links: Route.LinksFunction = () => [
-    ...fontLinks(),
-];
 
 export default function Head() {
     return (

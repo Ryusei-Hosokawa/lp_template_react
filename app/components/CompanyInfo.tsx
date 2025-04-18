@@ -28,32 +28,9 @@ export default function CompanyInfo() {
     ];
 
     return (
-        <div
-            className="
-            bg-[#FDF4ED]
-            px-[4.5%]
-            pt-[40px]
-            pb-[70px]
-        "
-        >
-            <div
-                className="
-                px-[5%]
-                py-[40px]
-                rounded-[10px]
-                bg-[#fff]
-                shadow-[0_0_10px_0_rgba(0,0,0,0.2)]
-                "
-            >
-                <table
-                    className="
-                    w-full
-                    text-left
-                    mb-[20px]
-                    bg-[#fff]
-                    
-                    "
-                >
+        <div className=" bg-[#FDF4ED] px-[4.5%] pt-[40px] pb-[70px]">
+            <div className=" px-[5%] py-[40px] rounded-[10px] bg-[#fff] shadow-[0_0_10px_0_rgba(0,0,0,0.2)]">
+                <table className=" w-full text-left mb-[20px] bg-[#fff]">
                     <tbody
                         className="
                             block
