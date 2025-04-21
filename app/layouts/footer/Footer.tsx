@@ -1,41 +1,25 @@
-import React from "react";
-import { companyInformation } from "../../LpData";
-import { Link } from "react-router";
+import React, { memo } from "react";
+import { footerData, mainData } from "../../LpData";
+import { useLocation } from "react-router";
+import Copyright from "./Copyright";
+import LinkText from "./LinkText";
 
-export default function Footer() {
+export default memo(function Footer() {
+    const location = useLocation();
+    const isMainPage = location.pathname === "/" || location.pathname === "/home";
+    
     return (
-        <footer className="sticky top-full bg-gray-800 text-white py-[100px]">
-            <div className="max-w-screen-xl mx-auto px-4">
+        <footer className={`
+            sticky top-full py-[100px] z-[500]
+            ${footerData.background}
+            ${isMainPage ? `${mainData.mainWidth} mx-auto` : 'w-screen-xl'}
+        `}>
+            <div className={`mx-auto px-4`}>
                 <div className="flex flex-col items-center">
-                    <ul className="
-                        flex
-                        justify-center
-                        items-center
-                        mb-[20px]
-                    ">
-                        <li>
-                            <a
-                                href="about"
-                                className="hover:text-gray-300 transition-colors"
-                            >
-                                会社概要
-                            </a>
-                        </li>
-                        <span className="mx-[10px]">|</span>
-                        <li>
-                            <a
-                                href="privacy_policy"
-                                className="hover:text-gray-300 transition-colors"
-                            >
-                                プライバシーポリシー
-                            </a>
-                        </li>
-                    </ul>
-                    <small className="text-[12px] text-[#c9c9c9] font-[300]">
-                        Copyright © {companyInformation.name} All rights reserved.
-                    </small>
+                    <LinkText links={footerData.linkText.link} textColor={footerData.linkText.color} />
+                    <Copyright textColor={footerData.copyrightText} />
                 </div>
             </div>
         </footer>
     );
-}
+});

@@ -8,24 +8,13 @@ import { Image } from "../../components";
  */
 export default function SideBanner() {
     return (
-        <div
-            className="
-                sticky
-                bottom-0
-                left-0
-                w-full
-                max-w-[1500px]
-                h-[100vh]
-                z-[800]
-            "
-        >
-            {sideData.map((side) => (
+        <div className="fixed bottom-0 left-[50%] translate-x-[-50%] w-full h-[100vh] z-[-1]">
+            {Object.values(sideData).map((side) => (
                 <div
-                    key={side.type}
+                    key={side.imageName}
                     className={`
                         max-[780px]:hidden
                         absolute
-                        max-w-[200px]
                         ${side.size}
                         ${side.position}
                     `}

@@ -7,21 +7,14 @@ export default function MainBackground() {
             {backgroundData.map((bg) => {
                 const isLeft = bg.type === "left";
                 return (
-                    <div 
-                        key={bg.type}
-                        className={`
-                            absolute 
-                            top-0 
-                            w-1/2 
-                            h-full 
-                            ${isLeft ? 'left-0' : 'right-0'}
-                            ${isLeft ? bg.backgroundLeft : bg.backgroundRight}
-                            ${isLeft ? bg.backgroundAttachmentLeft : bg.backgroundAttachmentRight}
-                            ${isLeft ? bg.backgroundSizeLeft : bg.backgroundSizeRight}
-                            ${isLeft ? bg.backgroundRepeatLeft : bg.backgroundRepeatRight}
-                            ${isLeft ? bg.backgroundPositionLeft : bg.backgroundPositionRight}
-                        `}
-                    />
+                    <div key={bg.type} className={`absolute top-0 w-1/2 h-full
+                        ${isLeft ? 'left-0' : 'right-0'}
+                        ${isLeft ? bg.backgroundLeft : bg.backgroundRight}
+                        ${isLeft ? bg.backgroundAttachmentLeft : bg.backgroundAttachmentRight}
+                        ${isLeft ? bg.backgroundSizeLeft : bg.backgroundSizeRight}
+                        ${isLeft ? bg.backgroundRepeatLeft : bg.backgroundRepeatRight}
+                        ${isLeft ? bg.backgroundPositionLeft : bg.backgroundPositionRight}
+                    `} />
                 );
             })}
         </div>

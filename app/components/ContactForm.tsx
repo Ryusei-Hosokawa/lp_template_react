@@ -1,6 +1,7 @@
 import React from "react";
 import { formData, companyInformation } from "../LpData";
-import { RequiredLabel } from "./form_ui";
+import { Image } from "./Image";
+import { RequiredLabel, FormTitle, FormContainer, FormContent } from "./form_ui";
 import PrivacyPolicyText from "./PrivacyPolicyText";
 
 export default function ContactForm() {
@@ -9,36 +10,39 @@ export default function ContactForm() {
     const formTitleData = formData.find((item) => item.type === "formTitle");
     const formObjectData = formData.find((item) => item.type === "formObject");
 
+    // タイトルの位置設定（"in"または"out"）
+    const titlePosition = formTitleData?.position || "in";
+
     return (
-        <div
-            id="from"
-            className={`
-                ${formBgData?.formPadding || ""}
-                ${formBgData?.formTopSpace || ""}
-                ${formBgData?.background || ""}
-            `}
+        <FormContainer
+            padding={formBgData?.formPadding}
+            topSpace={formBgData?.formTopSpace}
+            background={formBgData?.background}
         >
-            <article
-                className={`
-                px-[5%]
-                py-[40px]
-                rounded-[10px]
-                shadow-[0_0_10px_0_rgba(0,0,0,0.2)]
-                ${formObjectData?.background || ""}
-            `}
+            {/* タイトルがFormContentの外に配置される場合 */}
+            {titlePosition === "out" && (
+                <FormTitle 
+                    titleImageName={formTitleData?.titleImageName}
+                    titleImageWidth={formTitleData?.titleImageWidth}
+                    titleMargin={formTitleData?.titleMargin}
+                />
+            )}
+            
+            <FormContent 
+                background={formObjectData?.background}
+                padding={formObjectData?.padding}
+                shadow={formObjectData?.shadow}
+                rounded={formObjectData?.rounded}
             >
-                <h2
-                    className={`
-                    mx-auto
-                    mb-[20px]
-                    ${formTitleData?.titleImageWidth || ""}
-                `}
-                >
-                    <img
-                        src={`images/${formTitleData?.titleImageName || ""}`}
-                        className="mx-auto"
+                {/* タイトルがFormContentの中に配置される場合 */}
+                {titlePosition === "in" && (
+                    <FormTitle 
+                        titleImageName={formTitleData?.titleImageName}
+                        titleImageWidth={formTitleData?.titleImageWidth}
+                        titleMargin={formTitleData?.titleMargin}
                     />
-                </h2>
+                )}
+                
                 <form
                     method="post"
                     action="./confirm.php"
@@ -51,8 +55,7 @@ export default function ContactForm() {
                         grid
                         grid-cols-1
                         gap-4
-                    "
-                    >
+                    ">
                         {[
                             {
                                 id: "name",
@@ -176,7 +179,7 @@ export default function ContactForm() {
                         <input type="hidden" name="action" value="confirm" />
                     </div>
                 </form>
-            </article>
-        </div>
+            </FormContent>
+        </FormContainer>
     );
 }

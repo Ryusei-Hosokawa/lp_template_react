@@ -1,8 +1,9 @@
-import React from "react";
-import type { Route } from "../../+types/root";
-import { Links, Meta } from "react-router";
+import React, { memo } from "react";
+import { Links } from "react-router";
+import Meta from "./Meta";
 
-export default function Head() {
+// メモ化されたヘッドコンポーネント
+export default memo(function Head() {
     return (
         <head>
             <meta charSet="utf-8" />
@@ -14,4 +15,4 @@ export default function Head() {
             <Links />
         </head>
     );
-}  
+});  

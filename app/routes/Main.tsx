@@ -1,47 +1,30 @@
 import React from "react";
-import { imageData } from "../LpData";
-import { Cta, ContactForm, CompanyInfo, Image } from "../components";
+import { mainData } from "../LpData";
+import { MainContents, ContactForm, CompanyInfo, MainInner, FixedCtaButton } from "../components";
 import SideBanner from "../layouts/sidebanner/SideBanner";
-import { useHeaderResizeEffect } from "../logics/headerResizeObserver";
+import { useHeaderResizeEffect } from "../logics";
 
+/**
+ * メインページコンポーネント
+ * ヘッダーリサイズ効果を適用し、メインコンテンツを表示
+ */
 export default function Main() {
     // ヘッダー高さ自動調整機能を適用
     useHeaderResizeEffect();
 
-    // 画像配列を生成（1からimageItem数まで）
-    const imageNumbers = Array.from(
-        { length: imageData.imageItem },
-        (_, i) => i + 1
-    );
-
     return (
-        <main className="relative w-full">
-            {/* <SideBanner /> */}
-            <div
-                className={`
-                mx-auto
-                drop-shadow-[0_0_10px_rgba(0,0,0,0.3)]
-                ${imageData.mainWidth}
-            `}
-            >
-                <div className="h-[auto]">
-                    {imageNumbers.map((imageNumber) => {
-                        // 画像ファイル名は1から始まるので、そのまま使用
-                        return (
-                            <React.Fragment key={imageNumber}>
-                                <div className="w-full">
-                                    <img src={`images/img_${imageNumber}.jpg`} alt={`メイン画像 ${imageNumber}`} className="w-full" />
-                                </div>
-                                {!imageData.ctaButton.includes(imageNumber) && (
-                                    <Cta />
-                                )}
-                            </React.Fragment>
-                        );
-                    })}
-                </div>
+        <main className="block relative w-full z-[500]">
+            <MainInner> {/* メインコンテンツの内側エリアを包むラッパーコンポーネント ここから */}
+
+                <MainContents /> {/* メインコンテンツ生成部分 */}
                 <ContactForm /> {/* フォーム内容 */}
                 <CompanyInfo /> {/* 会社概要 */}
-            </div>
+
+            </MainInner> {/* メインコンテンツの内側エリアを包むラッパーコンポーネント ここまで */}
+            
+            {/* 追従型CTAボタン */}
+            <FixedCtaButton />
+            <SideBanner /> {/* サイドバナー要素コンポーネント */}
         </main>
     );
 }

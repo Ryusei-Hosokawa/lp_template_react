@@ -1,12 +1,15 @@
 import React from "react";
 import { companyInformation } from "../LpData";
+import { getCompanyInfoValue } from '../utils/companyUtils';
 
 export default function PrivacyPolicyText() {
     return (
         <p className="text-[14px] text-center">
             <span className="block mb-[1em]">
                 <span className="block mb-[0.5em]">
-                    <span className="font-bold">{companyInformation.name}</span>
+                    <span className="font-bold">
+                        {getCompanyInfoValue(companyInformation, "name")}
+                    </span>
                     (以下「当社」)は、以下のとおり個人情報保護方針を定め、
                     個人情報保護の仕組みを構築し、全従業員に個人情報保護の重要性の認識と取組みを
                     徹底させることにより、個人情報の保護を推進致します。

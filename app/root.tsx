@@ -1,5 +1,5 @@
 // Reactライブラリをインポート - UIコンポーネントの作成に必要
-import React, { useEffect, memo } from "react";
+import React, { useEffect } from "react";
 // React Routerからルーティング関連の機能をインポート
 import {
     isRouteErrorResponse, // エラーレスポンスかどうかを判定する関数
@@ -7,41 +7,19 @@ import {
     Scripts, // JavaScriptを読み込むためのコンポーネント
     ScrollRestoration, // ページ遷移時のスクロール位置を復元するコンポーネント
     useLocation, // 現在のURLロケーションを取得するフック
-    Meta,
-    Links,
 } from "react-router";
 import * as layouts from "./layouts"; // レイアウト関連のコンポーネントをインポート（ヘッダー、フッターなど）
 import type { Route } from "./+types/root"; // 型定義をインポート
 import "./app.css"; // グローバルCSSをインポート
 import MainBackground from "./components/MainBackground"; // 背景設定用のコンポーネントをインポート
 import { useHeaderResizeEffect } from "./logics/headerResizeObserver"; // ヘッダーのリサイズ監視
-import { fontLinks } from "./layouts/head/fontLinks";
+import { fontLinks } from "./layouts/head"; // ヘッド関連の機能をインポート
+import SideBanner from "./layouts/sidebanner/SideBanner"; // サイドバナー要素コンポーネントをインポート
 
 // フォントリンクをエクスポート
 export const links: Route.LinksFunction = () => [
     ...fontLinks(),
 ];
-
-// メモ化されたヘッドコンポーネント - 再レンダリングを防止
-const MemoizedHead = memo(function Head() {
-    return (
-        <head>
-            <meta charSet="utf-8" />
-            <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1"
-            />
-            <Meta />
-            <Links />
-        </head>
-    );
-});
-
-// メモ化されたヘッダーコンポーネント - 再レンダリングを防止
-const MemoizedHeader = memo(layouts.Header);
-
-// メモ化されたフッターコンポーネント - 再レンダリングを防止
-const MemoizedFooter = memo(layouts.Footer);
 
 // アプリケーションのルートコンポーネント - React Routerのエントリーポイント
 export default function App() {
@@ -62,7 +40,7 @@ export default function App() {
     // Layoutは1回だけレンダリングされ、内部のOutletだけがページ遷移時に変更される
     return (
         <html lang="ja">
-            <MemoizedHead />
+            <layouts.Head />
             <body
                 className={`
                     relative
@@ -71,7 +49,7 @@ export default function App() {
                 `}
             >
                 <MainBackground />
-                <MemoizedHeader />
+                <layouts.Header />
                 <noscript>
                     <div style={{ 
                         padding: '20px', 
@@ -88,7 +66,7 @@ export default function App() {
                 {/* Outletのみがページ遷移時に変更される */}
                 <Outlet />
                 
-                <MemoizedFooter />
+                <layouts.Footer />
                 <ScrollRestoration />
                 <Scripts />
             </body>

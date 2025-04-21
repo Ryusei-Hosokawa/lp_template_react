@@ -9,20 +9,8 @@ export default function PrivacyPolicy() {
     return (
         <main className="w-full max-w-[900px] mx-auto px-4">
             <div className="pt-[50px]">
-                <article
-                    className="
-                        w-full
-                        mb-[50px]
-                        px-[20px]
-                        py-[30px]
-                        bg-[#FDF4ED]
-                        rounded-lg
-                        shadow-md"
-                >
-                    <h2 className="text-2xl font-bold mb-8 text-center">
-                        プライバシーポリシー
-                    </h2>
-
+                <article className=" w-full mb-[50px] px-[20px] py-[30px] bg-[#fff]  rounded-lg  shadow-md">
+                    <h2 className="text-2xl font-bold mb-8 text-center">プライバシーポリシー</h2>
                     <PrivacyPolicyText />
                 </article>
             </div>
