@@ -41,23 +41,11 @@ export default function App() {
     return (
         <html lang="ja">
             <layouts.Head />
-            <body
-                className={`
-                    relative
-                    min-h-screen
-                    z-[-100]
-                `}
-            >
+            <body className={`relative min-h-screen z-[-100]`}>
                 <MainBackground />
                 <layouts.Header />
                 <noscript>
-                    <div style={{ 
-                        padding: '20px', 
-                        textAlign: 'center', 
-                        backgroundColor: '#ffeeee',
-                        border: '1px solid #ff0000',
-                        margin: '20px'
-                    }}>
+                    <div style={{ padding: '20px', textAlign: 'center', backgroundColor: '#ffeeee',border: '1px solid #ff0000',margin: '20px'}}>
                         <p>このサイトはJavaScriptを有効にする必要があります。</p>
                         <p>Please enable JavaScript to view this website properly.</p>
                     </div>

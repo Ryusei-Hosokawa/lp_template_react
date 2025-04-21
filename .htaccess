@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /domain/react_router_lp_test/
+  # 存在するファイルやディレクトリはそのままアクセス
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+  # 上記以外の全リクエストをindex.htmlへ
+  RewriteRule . index.html [L]
+</IfModule> 
