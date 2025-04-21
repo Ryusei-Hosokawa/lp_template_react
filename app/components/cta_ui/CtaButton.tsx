@@ -25,7 +25,7 @@ export default function CtaButton({ isFirstView, isFirstViewWithCta = false }: C
             onClick={scrollToForm}
         >
             <Image 
-                src={isFirstViewWithCta ? "CTA_fv_special.png" : buttonData.imageName}
+                src={isFirstViewWithCta && isFirstView ? CtaData.cta_fv.imageName : buttonData.imageName}
                 className={isFirstView ? 'drop-shadow-lg' : ''}
             />
         </button>
