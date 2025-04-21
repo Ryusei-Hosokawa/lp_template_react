@@ -27,7 +27,7 @@ function safeOpenInNewTab(url: string): void {
  */
 export function handleButtonClick(type: string, link?: string): void {
     // headerDataからタイプを取得
-    const headerItem = findItemByType(headerData.items, type);
+    const headerItem = findItemByType(headerData, type);
     
     switch (type) {
         case "line":

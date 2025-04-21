@@ -3,49 +3,78 @@
  */
 
 /**
+ * ヘッダーデータの型定義
+ */
+type HeaderItem = {
+  link?: string;
+  imageName?: string;
+  imageNameSp?: string;
+  imageUse?: boolean;
+  logoWidth?: string;
+  logoMaxWidth?: string;
+  logoWidthSp?: string;
+  background?: string;
+  [key: string]: any;
+};
+
+type HeaderData = {
+  logo: HeaderItem;
+  line: HeaderItem;
+  mail: HeaderItem;
+  tel: HeaderItem;
+  header: HeaderItem;
+  [key: string]: HeaderItem;
+};
+
+/**
  * 指定されたタイプのヘッダーアイテムをフィルタリングする関数
- * @param items ヘッダーアイテムの配列
+ * @param headerData ヘッダーデータオブジェクト
  * @param types フィルタリングするタイプの配列
  * @returns フィルタリングされたアイテムの配列
  */
 export const filterHeaderItemsByType = (
-  items: Array<{ type: string; [key: string]: any }>,
+  headerData: HeaderData,
   types: string[]
-): Array<{ type: string; [key: string]: any }> => {
-  return items.filter((item) => types.includes(item.type));
+): Array<HeaderItem & { type: string }> => {
+  return Object.keys(headerData)
+    .filter(key => types.includes(key))
+    .map(key => ({ type: key, ...headerData[key] }));
 };
 
 /**
  * リンク系アイテム（line, mail, tel, link）をフィルタリングする関数
- * @param items ヘッダーアイテムの配列
+ * @param headerData ヘッダーデータオブジェクト
  * @returns リンク系アイテムの配列
  */
 export const filterLinkItems = (
-  items: Array<{ type: string; [key: string]: any }>
-): Array<{ type: string; [key: string]: any }> => {
-  return filterHeaderItemsByType(items, ["line", "mail", "tel", "link"]);
+  headerData: HeaderData
+): Array<HeaderItem & { type: string }> => {
+  return filterHeaderItemsByType(headerData, ["line", "mail", "tel", "link"]);
 };
 
 /**
  * アイコン系アイテムをフィルタリングする関数
- * @param items ヘッダーアイテムの配列
+ * @param headerData ヘッダーデータオブジェクト
  * @returns アイコン系アイテムの配列
  */
 export const filterIconItems = (
-  items: Array<{ type: string; [key: string]: any }>
-): Array<{ type: string; [key: string]: any }> => {
-  return filterHeaderItemsByType(items, ["icon"]);
+  headerData: HeaderData
+): Array<HeaderItem & { type: string }> => {
+  return filterHeaderItemsByType(headerData, ["icon"]);
 };
 
 /**
  * 指定されたタイプのヘッダーアイテムを取得する関数
- * @param items ヘッダーアイテムの配列
+ * @param headerData ヘッダーデータオブジェクト
  * @param type 取得するアイテムのタイプ
  * @returns 見つかったアイテムまたはundefined
  */
 export const findItemByType = (
-  items: Array<{ type: string; [key: string]: any }>,
+  headerData: HeaderData,
   type: string
-): { type: string; [key: string]: any } | undefined => {
-  return items.find((item) => item.type === type);
+): (HeaderItem & { type: string }) | undefined => {
+  if (type in headerData) {
+    return { type, ...headerData[type] };
+  }
+  return undefined;
 }; 

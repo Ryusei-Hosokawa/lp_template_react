@@ -16,11 +16,33 @@ export const metaInformation = {
 }
 // meta情報 ここまで //
 
+// ヘッダー項目の型定義
+type HeaderItem = {
+    link?: string;
+    imageName?: string;
+    imageNameSp?: string;
+    imageUse?: boolean;
+    logoWidth?: string;
+    logoMaxWidth?: string;
+    logoWidthSp?: string;
+    background?: string;
+    [key: string]: any;
+};
+
+// ヘッダーデータの型定義
+interface HeaderData {
+    logo: HeaderItem;
+    line: HeaderItem;
+    mail: HeaderItem;
+    tel: HeaderItem;
+    header: HeaderItem;
+    [key: string]: HeaderItem;
+}
+
 // ヘッダー画像系の情報 ここから //
-export const headerData = [
+export const headerData: HeaderData = {
     // 会社ロゴ ここから //
-    {
-        type: "logo", // ※基本触らない
+    logo: {
         link: "./", // リンク先
         imageName: "logo.png", // 画像名
         logoWidth: "w-[20vw]",
@@ -29,23 +51,20 @@ export const headerData = [
     },
     // 会社ロゴ ここまで //
     // LINEの画像 ここから //
-    {
-        type: "line", // ※基本触らない
+    line: {
         link: "https://www.line.me/ja/", // リンク先
         imageName: "line_pc.png", // 画像名
         imageNameSp: "line_sp.svg", // スマホの画像名
     },
     // LINEの画像 ここまで //
     // メールの画像 ここから //
-    {
-        type: "mail", // ※基本触らない
+    mail: {
         imageName: "mail_pc.png", // 画像名
         imageNameSp: "mail_sp.svg", // スマホの画像名
     },
     // メールの画像 ここまで //
     // 電話の画像 ここから //
-    {
-        type: "tel", // ※基本触らない
+    tel: {
         link: `${companyInformation.tel}`, // リンク先 もし会社概要の番号問違う場合はここを変更
         imageName: "tel_pc.svg", // 画像名
         imageNameSp: "tel_sp.svg", // スマホの画像名
@@ -53,12 +72,11 @@ export const headerData = [
     },
     // 電話の画像 ここまで //
     // ヘッダーバックグラウンド ここから //
-    {
-        type: "header", // ※基本触らない
+    header: {
         background: "bg-[#fff]", // 背景色もしくは背景画像（tailwind.cssの形式で記載）
     },
     // ヘッダーバックグラウンド ここまで //
-];
+};
 // ヘッダー画像系の情報 ここまで //
 
 // メイン画像の情報 ここから //
@@ -76,6 +94,8 @@ export const CtaData = [
         type: "button", // ※基本触らない
         imageName: "CTA.svg", // ボタンの画像名
         position: "top-[50%] left-[50%]", // 背景の配置
+        actionType: "scrollToForm", // ボタン押下時のアクション：'scrollToForm'または'lineLink'
+        linkUrl: "https://www.line.me/ja/", // actionTypeが'lineLink'の場合に使用するLINEのURL
     },
     // CTAボタンの画像 ここまで //
     // CTA背景の画像もしくはcssの色 ここから //

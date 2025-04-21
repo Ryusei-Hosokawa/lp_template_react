@@ -9,7 +9,7 @@ export const Image: React.FC<ImageProps> = ({
     src,
     className = "w-full",
 }) => {
-    const imagePath = `images/${src}`;
+    const imagePath = `/images/${src}`;
     return <img src={imagePath} className={className} />;
 };
 export default Image;
