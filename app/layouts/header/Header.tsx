@@ -9,7 +9,7 @@ import { filterLinkItems } from "../../logics/headerItemTypeFilter"; // リン�
 // Headerコンポーネントを定義し、メモ化
 export default memo(function Header() {
     // リンク系アイテムをフィルタリングして取得
-    const linkData = filterLinkItems(headerData.items);
+    const linkData = filterLinkItems(headerData.items as any);
 
     // 選択されたレイアウトタイプ
     const isModernLayout = headerData.layoutType === "modern";

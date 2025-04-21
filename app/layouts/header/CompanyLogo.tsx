@@ -6,22 +6,25 @@ import { findItemByType } from "../../logics";
 const { Link } = ReactRouter;
 
 export default function CompanyLogo() {
-    // headerData.itemsから特定のタイプのアイテムを取得
-    const logoItem = findItemByType(headerData.items, "logo");
-
-    // ロゴアイテムが見つからない場合は何も表示しない
-    if (!logoItem) return null;
-
     return (
-        <h1 className={`
-            hoverAction
-            ${logoItem.logoWidth}
-            ${logoItem.logoMaxWidth}
-            ${logoItem.logoWidthSp}
-        `}>
-            <Link to={`${logoItem.link}`}>
-                <Image src={`${logoItem.imageName}`} />
-            </Link>
-        </h1>
+        <>
+            {headerData
+                .filter((item) => item.type === "logo")
+                .map((logoData, index) => (
+                    <h1
+                        key={index}
+                        className={`
+                            hoverAction
+                            ${logoData.logoWidth}
+                            ${logoData.logoMaxWidth}
+                            ${logoData.logoWidthSp}
+                        `}
+                    >
+                        <Link to={`${logoData.link}`}>
+                            <Image src={`${logoData.imageName}`} />
+                        </Link>
+                    </h1>
+                ))}
+        </>
     );
 }
