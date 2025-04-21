@@ -2,6 +2,8 @@ import type { CompanyInfoItem } from "./utils/companyUtils"; // 会社情報の�
 import { getCompanyInfoValue } from "./utils/companyUtils"; // 会社情報を検索するためのユーティリティ関数 ※触らない
 import { mergeMetaInfo } from "./types/meta"; // メタ情報をマージするための関数 ※触らない
 import type { BaseMetaInfo, OgpInfo } from "./types/meta"; // メタ情報の型定義 ※触らない
+import type { HeaderItem, LayoutSettings, HeaderData } from "./types/header"; // ヘッダー関連の型定義
+import type { YoutubeProps, PlayerProps } from "./types/youtube"; // YouTube関連の型定義
 
 // 会社情報 ここから ====================================================================== //
 export const companyInformation = {
@@ -58,7 +60,7 @@ const ogpInfo: OgpInfo = {
 // meta情報 ここまで ======================================================================= //
 
 // ヘッダー画像系の情報 ここから ============================================================= //
-export const headerData = {
+export const headerData: HeaderData = {
     // レイアウトタイプの選択 ここから //
     layoutType: "standard", // "standard" または "modern"を指定
     // レイアウトタイプの選択 ここまで //
@@ -93,10 +95,9 @@ export const headerData = {
     },
     // モダンレイアウト用の追加設定 ここまで //
     // ヘッダーのアイテム ここから //
-    items: [
+    items: {
         // 会社ロゴ ここから //
-        {
-            type: "logo", // ※基本触らない
+        logo: {
             link: "./", // リンク先
             imageName: "logo.png", // 画像名
             logoWidth: "w-[20vw]", // ロゴの幅
@@ -105,30 +106,27 @@ export const headerData = {
         },
         // 会社ロゴ ここまで //
         // LINEの画像 ここから //
-        {
-            type: "line", // ※基本触らない
+        line: {
             link: "https://www.line.me/ja/", // リンク先
             imageName: "line_pc.png", // 画像名
             imageNameSp: "line_sp.svg", // スマホの画像名
         },
         // LINEの画像 ここまで //
         // メールの画像 ここから //
-        {
-            type: "mail", // ※基本触らない
+        mail: {
             imageName: "mail_pc.png", // 画像名
             imageNameSp: "mail_sp.svg", // スマホの画像名
         },
         // メールの画像 ここまで //
         // 電話の画像 ここから //
-        {
-            type: "tel", // ※基本触らない
+        tel: {
             link: getCompanyInfoValue(companyInformation, "tel"), // 電話番号
             imageName: "tel_pc.svg", // 画像名
             imageNameSp: "tel_sp.svg", // スマホの画像名
             imageUse: false, // 画像を使用したいときのみ「true」
         },
         // 電話の画像 ここまで //
-    ],
+    },
     // ヘッダーのアイテム ここまで //
 };
 // ヘッダー画像系の情報 ここまで ============================================================= //

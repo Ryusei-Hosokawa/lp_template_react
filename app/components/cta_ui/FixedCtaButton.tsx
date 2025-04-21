@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { CtaData } from "../../LpData";
 import { scrollToForm } from "../../logics/scrollLogics";
 import { Image } from "../Image";
+import type { FixedCtaButtonProps } from "../../types/cta";
 
 /**
  * 画面に追従するCTAボタンコンポーネント
  * スクロール位置に応じて表示/非表示を切り替え可能
  */
-export default function FixedCtaButton() {
+export default function FixedCtaButton({ isFirstViewWithCta = false }: FixedCtaButtonProps) {
     const settings = CtaData.cta_type;
     const [isVisible, setIsVisible] = useState(true);
 
@@ -44,7 +45,10 @@ export default function FixedCtaButton() {
             `}
             onClick={scrollToForm}
         >
-            <Image src={CtaData.button.imageName} />
+            <Image 
+                src={isFirstViewWithCta ? CtaData.cta_fv.imageName : CtaData.button.imageName} 
+                className={isFirstViewWithCta ? 'drop-shadow-lg' : ''}
+            />
         </button>
     );
 } 

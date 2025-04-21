@@ -2,14 +2,7 @@ import React, { memo } from "react";
 import Title from "./Title";
 import Player from "./Player";
 import { extractYoutubeVideoId } from "../../logics";
-
-type YoutubeProps = {
-    videoId: string | undefined;
-    title?: string | undefined;
-    containerClass?: string;
-    titleClass: string;
-    wrapperClass: string;
-};
+import type { YoutubeProps } from "../../types/youtube";
 
 /**
  * YouTubeセクション全体を表示するコンポーネント
@@ -28,7 +21,7 @@ export default memo(function Youtube({
     
     return (
         <div className={containerClass}>
-            {title && <Title title={title} titleClass={titleClass} />}
+            {title && <Title title={title} titleClass={titleClass || ''} />}
             <Player videoId={processedVideoId} wrapperClass={wrapperClass} />
         </div>
     );

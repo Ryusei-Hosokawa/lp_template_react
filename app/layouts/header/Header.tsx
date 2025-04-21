@@ -5,11 +5,12 @@ import { CompanyLogo, Tel } from "./index"; // 会社のロゴと電話ボタン
 import { Image } from "../../components/";
 import { handleButtonClick } from "../../logics/buttonActions"; // ボタンアクション関連のロジック
 import { filterLinkItems } from "../../logics/headerItemTypeFilter"; // リンク系アイテムをフィルタリングする関数
+import type { HeaderItem } from "../../types/header"; // ヘッダーアイテムの型定義
 
 // Headerコンポーネントを定義し、メモ化
 export default memo(function Header() {
     // リンク系アイテムをフィルタリングして取得
-    const linkData = filterLinkItems(headerData.items as any);
+    const linkData = filterLinkItems(headerData.items);
 
     // 選択されたレイアウトタイプ
     const isModernLayout = headerData.layoutType === "modern";
@@ -45,12 +46,7 @@ export default memo(function Header() {
                     `}
                     >
                         {/* ナビゲーションメニュー */}
-                        <ul
-                            className="
-                            flex justify-between
-                            items-center h-auto
-                        "
-                        >
+                        <ul className=" flex justify-between items-center h-auto">
                             {/* フィルタリングしたリンクデータを使ってリストアイテムを生成 */}
                             {linkData.map((item, index) => (
                                 <li key={index} className={`
@@ -84,7 +80,6 @@ export default memo(function Header() {
             </header>
         );
     }
-
     // モダンレイアウト用のヘッダーをレンダリング
     return (
         <header className={`
@@ -126,3 +121,4 @@ export default memo(function Header() {
         </header>
     );
 });
+

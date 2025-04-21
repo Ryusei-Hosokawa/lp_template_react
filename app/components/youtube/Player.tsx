@@ -1,14 +1,14 @@
 import React, { memo } from "react";
 import { generateEmbedUrl } from "../../logics";
+import type { PlayerProps } from "../../types/youtube";
 
-type PlayerProps = {
-    videoId: string;
-    wrapperClass: string;
-};
 /**
  * YouTube動画プレイヤーを表示するコンポーネント
  */
-export default memo(function Player({ videoId, wrapperClass }: PlayerProps) {
+export default memo(function Player({ 
+    videoId, 
+    wrapperClass = "w-full rounded-lg shadow-lg overflow-hidden" 
+}: PlayerProps) {
     // URLからの動画ID変換を適用
     const embedUrl = generateEmbedUrl(videoId);
 

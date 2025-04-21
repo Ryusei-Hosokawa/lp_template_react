@@ -2,15 +2,12 @@ import React from "react";
 import { CtaData } from "../../LpData";
 import { scrollToForm } from "../../logics/scrollLogics";
 import { Image } from "../Image";
+import type { CtaButtonProps } from "../../types/cta";
 
-type CtaButtonProps = {
-    isFirstView?: boolean; // ファーストビュー内かどうかのフラグ
-    isFirstViewWithCta?: boolean; // ファーストビュー内専用CTAボタンかどうかのフラグ
-};
 /**
  * CTAボタンコンポーネント
  */
-export default function CtaButton({ isFirstView, isFirstViewWithCta = false }: CtaButtonProps) {
+export default function CtaButton({ isFirstView = false, isFirstViewWithCta = false }: CtaButtonProps) {
     // ファーストビューか通常ボタンかで表示を切り替え
     const buttonData = isFirstView ? CtaData.cta_fv : CtaData.button;
         
@@ -25,7 +22,7 @@ export default function CtaButton({ isFirstView, isFirstViewWithCta = false }: C
             onClick={scrollToForm}
         >
             <Image 
-                src={isFirstViewWithCta && isFirstView ? CtaData.cta_fv.imageName : buttonData.imageName}
+                src={isFirstViewWithCta ? CtaData.cta_fv.imageName : buttonData.imageName}
                 className={isFirstView ? 'drop-shadow-lg' : ''}
             />
         </button>

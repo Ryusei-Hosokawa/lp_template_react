@@ -1,5 +1,5 @@
 import React from "react";
-import { mainData } from "../LpData";
+import { mainData, CtaData } from "../LpData";
 import { MainContents, ContactForm, CompanyInfo, MainInner, FixedCtaButton } from "../components";
 import SideBanner from "../layouts/sidebanner/SideBanner";
 import { useHeaderResizeEffect } from "../logics";
@@ -23,7 +23,7 @@ export default function Main() {
             </MainInner> {/* メインコンテンツの内側エリアを包むラッパーコンポーネント ここまで */}
             
             {/* 追従型CTAボタン */}
-            <FixedCtaButton />
+            <FixedCtaButton isFirstViewWithCta={CtaData.cta_fv.firstViewCta} />
             <SideBanner /> {/* サイドバナー要素コンポーネント */}
         </main>
     );
