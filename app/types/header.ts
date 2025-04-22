@@ -45,7 +45,7 @@ export type LayoutSettings = {
 
 /**
  * ヘッダーデータの型定義
- */
+*/
 export type HeaderData = {
     layoutType: 'standard' | 'modern';
     standardLayout: LayoutSettings;
@@ -53,4 +53,4 @@ export type HeaderData = {
     items: {
         [key: string]: HeaderItem;
     };
-} 
+}

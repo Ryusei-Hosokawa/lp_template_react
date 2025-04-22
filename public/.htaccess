@@ -1,5 +1,3 @@
-SetEnvIf User-Agent "Googlebot" allowbot
-allow from env=allowbot
 RewriteEngine On
 RewriteBase /react_router_lp_test/
 RewriteRule ^index\.html$ - [L]

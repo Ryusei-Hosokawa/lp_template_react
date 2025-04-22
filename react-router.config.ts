@@ -5,5 +5,5 @@ export default {
   ssr: false,
   future: {},
   // 相対パスのサブディレクトリにデプロイする場合
-  basename: '',
+  basename: "/domain/react_router_lp_test",
 } satisfies Config;

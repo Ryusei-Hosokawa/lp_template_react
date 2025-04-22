@@ -1,6 +1,7 @@
 {
     "name": "my-react-router-lp",
     "private": true,
+    "homepage": "https://add-flow.pya.jp/react_router_lp_test/",
     "type": "module",
     "scripts": {
         "build": "react-router build",

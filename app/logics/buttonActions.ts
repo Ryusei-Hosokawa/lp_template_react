@@ -26,8 +26,8 @@ function safeOpenInNewTab(url: string): void {
  * @param link リンク先URL
  */
 export function handleButtonClick(type: string, link?: string): void {
-    // headerDataからタイプを取得
-    const headerItem = findItemByType(headerData, type);
+    // headerData.itemsからタイプを取得
+    const headerItem = findItemByType(headerData.items, type);
     
     switch (type) {
         case "line":
