@@ -2,7 +2,7 @@ import type { CompanyInfoItem } from "./utils/companyUtils"; // 会社情報の�
 import { getCompanyInfoValue } from "./utils/companyUtils"; // 会社情報を検索するためのユーティリティ関数 ※触らない
 import { mergeMetaInfo } from "./types/meta"; // メタ情報をマージするための関数 ※触らない
 import type { BaseMetaInfo, OgpInfo } from "./types/meta"; // メタ情報の型定義 ※触らない
-import type { HeaderItem, LayoutSettings, HeaderData } from "./types/header"; // ヘッダー関連の型定義
+import type { HeaderData } from "./types/header"; // ヘッダー関連の型定義
 
 // 会社情報 ここから ====================================================================== //
 export const companyInformation = {
