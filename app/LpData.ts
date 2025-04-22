@@ -3,7 +3,6 @@ import { getCompanyInfoValue } from "./utils/companyUtils"; // 会社情報を�
 import { mergeMetaInfo } from "./types/meta"; // メタ情報をマージするための関数 ※触らない
 import type { BaseMetaInfo, OgpInfo } from "./types/meta"; // メタ情報の型定義 ※触らない
 import type { HeaderItem, LayoutSettings, HeaderData } from "./types/header"; // ヘッダー関連の型定義
-import type { YoutubeProps, PlayerProps } from "./types/youtube"; // YouTube関連の型定義
 
 // 会社情報 ここから ====================================================================== //
 export const companyInformation = {
@@ -38,6 +37,7 @@ export const companyInformation = {
     }, 
     // 営業時間 ここまで //
 };
+
 export const companyMap = {
     map: '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6481.57879728222!2d139.7490498!3d35.682187299999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188c74444f031b%3A0x6661f396d1d56740!2z44CSMTAwLTAwMDEg5p2x5Lqs6YO95Y2D5Luj55Sw5Yy65Y2D5Luj55Sw77yR4oiS77yRIOeUn-eJqeWtpueglOeptuaJgA!5e0!3m2!1sja!2sjp!4v1745215877093!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>',
     width: "100%",
@@ -63,9 +63,12 @@ const ogpInfo: OgpInfo = {
 export const headerData: HeaderData = {
     // レイアウトタイプの選択 ここから //
     layoutType: "standard", // "standard" または "modern"を指定
-    // レイアウトタイプの選択 ここまで //
+    // レスポンスの画面幅指定 ここから //
+    responseWidth: 1200, // レスポンスの画面幅
+    // レスポンスの画面幅指定 ここまで //
     // 標準レイアウト用の設定 ここから //
     standardLayout: {
+        logoWidth: "max-w-[200px]", // ロゴの幅
         maxWidth: "max-w-[1500px]", // コンテンツの最大幅
         padding: "px-[5%] py-[0.5%]", // 内部の余白
         paddingSp: "max-[780px]:px-[3%] max-[780px]:py-[1%]", // スマホ用の余白
@@ -81,27 +84,25 @@ export const headerData: HeaderData = {
     // 標準レイアウト用の設定 ここまで //
     // モダンレイアウト用の追加設定 ここから //
     modernLayout: {
-        logoPosition: "left-[5%]", // ロゴの左からの位置
-        logoVerticalPosition: "top-[50%]", // ロゴの上からの位置
-        logoTransform: "transform translate-y-[-50%]", // ロゴの変形（中央揃えなど）
-        ctaPosition: "right-[5%]", // CTAボタンエリアの右からの位置
-        ctaVerticalPosition: "top-[50%]", // CTAボタンエリアの上からの位置
-        ctaTransform: "transform translate-y-[-50%]", // CTAボタンエリアの変形
-        ctaSpacing: "space-x-4", // CTAボタン間の間隔
-        background: "bg-white/80 backdrop-blur-md", // 背景（半透明+ぼかし効果）
-        shadow: "shadow-md", // 影の設定
-        height: "h-[80px]", // ヘッダーの高さ
-        zIndex: "z-[1000]", // 重なり順
+        logoPosition: "top-[15%] right-[20%]", // ロゴの左からの位置
+        logoWidth: "w-[20vw]", // ロゴの幅
+        buttonPosition: "bottom-[10%] right-[30%]", // 追従ボタンの位置
+        buttonWidth: "w-[42%]", // 追従ボタンの幅
+        buttonSpacing: "space-y-[5px]", // CTAボタン間の間隔
+        background: "bg-[transparent]", // 背景
+        shadow: "", // 影の設定
+        width: "max-w-[30vw]", // ヘッダーの幅
+        height: "h-[100vh]", // ヘッダーの高さ
+        zIndex: "z-[500]", // 重なり順
     },
     // モダンレイアウト用の追加設定 ここまで //
     // ヘッダーのアイテム ここから //
     items: {
         // 会社ロゴ ここから //
         logo: {
-            link: "./", // リンク先
+            link: "#", // リンク先
             imageName: "logo.png", // 画像名
-            logoWidth: "w-[20vw]", // ロゴの幅
-            logoMaxWidth: "max-w-[200px]", // ロゴの最大幅
+            logoMaxWidth: "max-w-[400px]", // ロゴの最大幅
             logoWidthSp: "max-[780px]:w-[50%]", // スマホのロゴの幅
         },
         // 会社ロゴ ここまで //
@@ -109,12 +110,14 @@ export const headerData: HeaderData = {
         line: {
             link: "https://www.line.me/ja/", // リンク先
             imageName: "line_pc.png", // 画像名
+            imageNameSide: "side_line.png", // 画像名
             imageNameSp: "line_sp.svg", // スマホの画像名
         },
         // LINEの画像 ここまで //
         // メールの画像 ここから //
         mail: {
             imageName: "mail_pc.png", // 画像名
+            imageNameSide: "side_mail.png", // 画像名
             imageNameSp: "mail_sp.svg", // スマホの画像名
         },
         // メールの画像 ここまで //
@@ -122,6 +125,7 @@ export const headerData: HeaderData = {
         tel: {
             link: getCompanyInfoValue(companyInformation, "tel"), // 電話番号
             imageName: "tel_pc.svg", // 画像名
+            imageNameSide: "side_tel.png", // 画像名
             imageNameSp: "tel_sp.svg", // スマホの画像名
             imageUse: false, // 画像を使用したいときのみ「true」
         },
@@ -134,8 +138,7 @@ export const headerData: HeaderData = {
 // メインページの情報 ここから ================================================================= //
 export const mainData = {
     mainWidth: "max-w-[660px]",
-    imageItem: 9, // メインコンテンツ内に並べる画像の数
-    ctaButton: [1, 8, 9], // これらの番号の画像の下にはCTAボタンを表示しない
+    imageItem: 8, // メインコンテンツ内に並べる画像の数
     youtubeData: {
         title: "動画で見る", // セクションのタイトルテキスト
         titleClass: "block text-[35px] text-[#fff] font-[700] mb-[15px] text-center bg-[#222] px-[20px] pt-[5px] pb-[6px] rounded-full", // YouTubeのセクションタイトルのスタイル
@@ -149,6 +152,7 @@ export const mainData = {
 
 // CTAボタン系の情報 ここから ================================================================ //
 export const CtaData = {
+    ctaButton: [1, 7, 8], // これらの番号の画像の下にはCTAボタンを表示しない
     button: { // CTAボタンの画像 ここから //
         imageName: "CTA.png", // ボタンの画像名
         imageSize: "w-[80%]", // ボタンの画像の幅
@@ -163,12 +167,12 @@ export const CtaData = {
         position: "top-[50%] left-[3%]", // 装飾の配置
     }, // CTAの装飾の要素 ここまで //
     cta_fv: { // ファーストビュー内に専用のCTAボタンを表示するかどうか ここから //
-        imageName: "CTA_fv.png", // 画像の画像名
         firstViewCta: true, // ファーストビュー内に専用のCTAボタンを表示するかどうか
+        imageName: "CTA_fv.png", // 画像の画像名
         position: "bottom-[-2%] left-[50%]", // 画像の配置
     }, // ファーストビュー内に専用のCTAボタンを表示するかどうか ここまで //
     cta_type: { // CTAボタンのタイプ設定 ここから //
-        type: "fixed", // "normal"（通常表示）または"fixed"（追従表示）
+        type: "normal", // "normal"（通常表示）または"fixed"（追従表示）
         fixedPosition: "bottom-[20px] right-[20px]", // 追従表示時の位置
         fixedSize: "w-[120px]", // 追従表示時のサイズ
         fixedZIndex: "z-[1000]", // 追従表示時の重なり順
@@ -252,21 +256,21 @@ export const backgroundData = [
 
 // サイド固定バナーの情報 ここから ============================================================ //
 export const sideData = {
-    left1_: { // 左側の画像 ここから //
+    left1_: { // 左上側の画像 ここから //
         imageName: "side_left_1.png", // 画像名
-        size: "w-[15%]", // 画像の幅
+        size: "w-[20%]", // 画像の幅
         position: "top-[10%] left-[5%]", // 画像の位置
-    }, // 左側の画像 ここまで //
-    left2_: { // 左側の画像 ここから //
+    }, // 左上側の画像 ここまで //
+    left2_: { // 左下側の画像 ここから //
         imageName: "side_left_2.png", // 画像名
         size: "w-[30%]", // 画像の幅
         position: "bottom-[0%] left-[1%]", // 画像の位置
-    }, // 左側の画像 ここまで //
-    right: { // 右側の画像 ここから //
+    }, // 左下側の画像 ここまで //
+    right: { // 右下側の画像 ここから //
         imageName: "side_right.png", // 画像名
-        size: "w-[50%]", // 画像の幅
+        size: "w-[33vw]", // 画像の幅
         position: "bottom-[0%] right-[0%]", // 画像の位置
-    }, // 右側の画像 ここまで //
+    }, // 右下側の画像 ここまで //
 };
 // サイド固定バナーの情報 ここまで ============================================================ //
 

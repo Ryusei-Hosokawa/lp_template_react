@@ -25,7 +25,7 @@ export default function MainContents() {
                             <Image src={`img_${imageNumber}.jpg`}/>
                             {isFirstViewWithCta && <CtaButton isFirstView={true} isFirstViewWithCta={true} />} {/* ファーストビュー内に専用のCTAボタンを表示するかどうか */}
                         </div>
-                        {!mainData.ctaButton.includes(imageNumber) && (<Cta show={CtaData.cta_type.type === "normal"}/>)}
+                        {!CtaData.ctaButton.includes(imageNumber) && (<Cta show={CtaData.cta_type.type === "normal"}/>)}
                         {mainData.youtubeData.enabled.includes(imageNumber) && (<Youtube videoId={mainData.youtubeData.videoUrl} wrapperClass={mainData.youtubeData.wrapperClass}/>)}
                     </React.Fragment>
                 );

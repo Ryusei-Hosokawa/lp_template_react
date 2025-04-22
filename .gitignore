@@ -4,3 +4,7 @@
 # React Router
 /.react-router/
 /build/
+
+# SFTP設定除外
+.cursor/sftp.json
+*.env

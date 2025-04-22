@@ -48,6 +48,7 @@ export type LayoutSettings = {
 */
 export type HeaderData = {
     layoutType: 'standard' | 'modern';
+    responseWidth: number;
     standardLayout: LayoutSettings;
     modernLayout: LayoutSettings;
     items: {

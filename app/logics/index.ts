@@ -25,3 +25,6 @@ export {
 
 // マップ関連ユーティリティ
 export { extractMapSrcFromIframe } from './mapUtils'; 
+
+// ロゴクリックハンドラー
+export { handleLogoClick } from './logoClickHandler'; 
