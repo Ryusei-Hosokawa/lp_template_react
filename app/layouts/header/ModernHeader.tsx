@@ -11,8 +11,10 @@ import { filterLinkItems } from "../../logics/headerItemTypeFilter";
  */
 export default function ModernHeader({
     isModernLayout,
+    isTopPage,
 }: {
     isModernLayout: boolean;
+    isTopPage: boolean;
 }) {
     // リンク系アイテムをフィルタリングして取得
     const linkData = filterLinkItems(headerData.items);
@@ -20,16 +22,16 @@ export default function ModernHeader({
 
     return (
         <>
-            <ModernStyle isModernLayout={isModernLayout} />
-            <header className={`
+            <ModernStyle isModernLayout={isModernLayout} isTopPage={isTopPage} />
+            <header
+                className={`
                 modern-header
-                fixed top-0 right-0 w-[30vw]
+                fixed top-0 right-0 z-[1000] w-[30vw]
                 ${modernLayout.height}
                 ${modernLayout.background}
                 ${modernLayout.shadow}
-                ${modernLayout.zIndex}
-                ${!isModernLayout ? 'hidden' : ''}
-            `}>
+            `}
+            >
                 {/* スタイルを内部に配置 */}
                 <style>{`
                     @media (max-width: ${headerData.responseWidth}px) {
@@ -38,30 +40,35 @@ export default function ModernHeader({
                         }
                     }
                 `}</style>
-                
+
                 {/* ロゴエリア */}
-                <div className={`
+                <div
+                    className={`
                     absolute
                     ${modernLayout.logoPosition}
-                `}>
-                    <CompanyLogo isModernLayout={isModernLayout} />
+                `}
+                >
+                    <CompanyLogo isModernLayout={isModernLayout} isTopPage={isTopPage} />
                 </div>
 
-                {/* CTAボタンエリア */}
-                <div className={`
-                    absolute flex flex-col items-center
+                {/* ボタンエリア */}
+                <div
+                    className={`
+                    absolute flex flex-col items-center z-[999]
                     ${modernLayout.buttonPosition}
                     ${modernLayout.buttonWidth}
                     ${modernLayout.buttonSpacing}
-                `}>
+                `}
+                >
                     {linkData.map((item, index) => (
-                        <button key={index} className="hoverAction"
-                            onClick={() => handleButtonClick(item.type, item.link)}
+                        <button
+                            key={index}
+                            className="hoverAction"
+                            onClick={() =>
+                                handleButtonClick(item.type, item.link)
+                            }
                         >
-                            <picture>
-                                <source srcSet={`images/sp_icons/${item.imageNameSp}`} media="(max-width: 780px)"/>
-                                <Image src={`${item.imageNameSide}`} />
-                            </picture>
+                            <Image src={`${item.imageNameSide}`} />
                         </button>
                     ))}
                 </div>

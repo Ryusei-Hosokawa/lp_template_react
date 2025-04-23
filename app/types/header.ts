@@ -31,7 +31,6 @@ export type LayoutSettings = {
     itemWidth?: string;
     itemWidthSp?: string;
     shadow?: string;
-    zIndex?: string;
     background?: string;
     logoPosition?: string;
     logoVerticalPosition?: string;
@@ -54,7 +53,6 @@ export type ModernLayout = {
     shadow: string;
     width: string;
     height: string;
-    zIndex: string;
 }
 
 /**

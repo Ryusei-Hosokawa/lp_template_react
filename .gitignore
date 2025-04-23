@@ -6,6 +6,5 @@
 /build/
 
 # SFTP設定除外
-.cursor/sftp.json
 .vscode/sftp.json
 **/*.env

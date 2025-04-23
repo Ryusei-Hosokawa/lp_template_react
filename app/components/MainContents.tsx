@@ -14,7 +14,7 @@ export default function MainContents() {
     const imageNumbers = generateImageNumbers(mainData.imageItem);
 
     return (
-        <div className="h-[auto]">
+        <div className="h-[auto] z-[999]">
             {imageNumbers.map((imageNumber: number) => {
                 // 画像ファイル名は1から始まるので、そのまま使用
                 const isFirstViewWithCta = imageNumber === 1 && CtaData.cta_fv.firstViewCta;

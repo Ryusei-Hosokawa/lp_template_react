@@ -13,7 +13,7 @@ export default function Main() {
     useHeaderResizeEffect();
 
     return (
-        <main className="block relative w-full z-[500]">
+        <main className="block relative w-full">
             <MainInner> {/* メインコンテンツの内側エリアを包むラッパーコンポーネント ここから */}
 
                 <MainContents /> {/* メインコンテンツ生成部分 */}

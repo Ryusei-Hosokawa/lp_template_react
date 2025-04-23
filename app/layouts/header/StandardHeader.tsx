@@ -12,20 +12,21 @@ import { filterLinkItems } from "../../logics/headerItemTypeFilter";
  */
 export default function StandardHeader({
     isModernLayout,
+    isTopPage,
 }: {
     isModernLayout: boolean;
+    isTopPage: boolean;
 }) {
     // リンク系アイテムをフィルタリングして取得
     const linkData = filterLinkItems(headerData.items);
     const { standardLayout } = headerData;
-
     return (
         <>
-            <ModernStyle isModernLayout={isModernLayout} />
+            <ModernStyle isModernLayout={isModernLayout} isTopPage={isTopPage} />
             <header
                 className={`
                 standard-header
-                fixed top-0 left-0 w-full mx-auto 
+                fixed top-0 left-0 w-full mx-auto z-[999]
                 ${standardLayout.zIndex}
                 ${standardLayout.shadow}
                 ${standardLayout.background}
@@ -40,7 +41,7 @@ export default function StandardHeader({
             `}
                 >
                     {/* ヘッダーの中身を配置するためのコンテナ */}
-                    <CompanyLogo isModernLayout={isModernLayout} />{" "}
+                    <CompanyLogo isModernLayout={isModernLayout} isTopPage={isTopPage} />{" "}
                     {/* 会社のロゴを表示 */}
                     <div
                         className={`

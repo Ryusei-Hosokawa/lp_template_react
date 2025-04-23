@@ -13,7 +13,7 @@ type MainInnerWrapperProps = {
 export default function MainInnerWrapper({ children }: MainInnerWrapperProps) {
     return (
         <div id="main_inner" 
-            className={`mx-auto drop-shadow-[0_0_10px_rgba(0,0,0,0.3)]
+            className={`mx-auto drop-shadow-[0_0_10px_rgba(0,0,0,0.3)] z-[999]
                 ${mainData.mainWidth}
             `}
         >

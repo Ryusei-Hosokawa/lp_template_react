@@ -68,7 +68,8 @@ export const headerData: HeaderData = {
     // レスポンスの画面幅指定 ここまで //
     // 標準レイアウト用の設定 ここから //
     standardLayout: {
-        logoWidth: "200px", // ロゴの幅
+        logoWidth: "100%", // ロゴの幅
+        logoMaxWidth: "200px", // ロゴの幅
         maxWidth: "max-w-[1500px]", // コンテンツの最大幅
         padding: "px-[5%] py-[0.5%]", // 内部の余白
         paddingSp: "max-[780px]:px-[3%] max-[780px]:py-[1%]", // スマホ用の余白
@@ -78,7 +79,6 @@ export const headerData: HeaderData = {
         itemWidth: "w-[32%]", // 各アイテムの幅
         itemWidthSp: "max-[780px]:w-[30%]", // スマホ用アイテム幅
         shadow: "shadow-md", // 影の設定
-        zIndex: "z-[999]", // 重なり順
         background: "bg-[#fff]", // 背景色もしくは背景画像（tailwind.cssの形式で記載）
     },
     // 標準レイアウト用の設定 ここまで //
@@ -93,7 +93,6 @@ export const headerData: HeaderData = {
         shadow: "", // 影の設定
         width: "max-w-[30vw]", // ヘッダーの幅
         height: "h-[100vh]", // ヘッダーの高さ
-        zIndex: "z-[500]", // 重なり順
     },
     // モダンレイアウト用の追加設定 ここまで //
     // ヘッダーのアイテム ここから //
