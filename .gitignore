@@ -7,4 +7,5 @@
 
 # SFTP設定除外
 .cursor/sftp.json
-*.env
+.vscode/sftp.json
+**/*.env

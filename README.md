@@ -1,87 +1,185 @@
-# Welcome to React Router!
+# モダンReact SPAランディングページテンプレート
 
-A modern, production-ready template for building full-stack React applications using React Router.
+Reactを使用したモダンでレスポンシブなランディングページテンプレートです。高速なウェブ開発環境Bunを使用して、シンプルかつ効率的に開発・ビルドできます。
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## 特徴
 
-## Features
+- 🚀 ユーザー体験を重視した単一ページアプリケーション（SPA）
+- 🔄 スタンダードとモダン、2種類のヘッダーレイアウト
+- 📱 自動的に画面サイズに適応するレスポンシブデザイン
+- 🛠️ 簡単にカスタマイズ可能なコンポーネント
+- 🎨 直感的なスタイリングのためのTailwindCSS
+- 📦 高速なBunによる開発・ビルド
+- 🚀 ロリポップサーバーへの簡単なアップロード設定
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+## Bunのインストール
 
-## Getting Started
+### WindowsでのBunインストール
 
-### Installation
+Windowsで開発を行う場合、WSL（Windows Subsystem for Linux）を使ってBunをインストールします：
 
-Install the dependencies:
+1. **WSLのインストール**（まだ設定していない場合）：
+   - PowerShellを管理者として開き、以下のコマンドを実行：
+   ```
+   wsl --install
+   ```
+   - PCを再起動し、Ubuntuのセットアップを完了
 
-```bash
-npm install
-```
+2. **Bunのインストール**：
+   - WSL上のUbuntuターミナルで以下のコマンドを実行：
+   ```
+   curl -fsSL https://bun.sh/install | bash
+   ```
+   - インストール完了後、以下のコマンドで動作確認：
+   ```
+   bun --version
+   ```
 
-### Development
+### macOSでのBunインストール
 
-Start the development server with HMR:
-
-```bash
-npm run dev
-```
-
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
-
-```bash
-npm run build
-```
-
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
+macOSでは、ターミナルで以下のコマンドを実行します：
 
 ```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
+curl -fsSL https://bun.sh/install | bash
 ```
 
-## Styling
+## 始めるには
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+### プロジェクトのセットアップ
+
+1. **依存関係のインストール**：
+   プロジェクトフォルダで以下のコマンドを実行：
+   ```
+   bun install
+   ```
+   これにより、プロジェクトに必要なすべてのパッケージがインストールされます。
+
+2. **開発サーバーの起動**：
+   ```
+   bun run dev
+   ```
+   ブラウザで `http://localhost:5173` にアクセスすると、開発中のサイトが表示されます。変更を保存すると、自動的にページが更新されます。
+
+## 本番環境用ビルド
+
+Webサイトを公開する準備ができたら、本番用ビルドを作成します：
+
+```
+bun run build
+```
+
+これにより `build/client` フォルダに最適化されたファイルが生成されます。このフォルダの内容をサーバーにアップロードすることで、サイトが公開できます。
+
+## サーバーへのアップロード
+
+### VS Codeを使ったFTPアップロード
+
+1. **SFTP拡張機能のインストール**：
+   - VS Codeの拡張機能タブで「SFTP」を検索してインストール
+   - サイドバーにSFTPアイコンが追加されます
+
+2. **ビルドを実行**：
+   ```
+   bun run build
+   ```
+
+3. **ファイルのアップロード**：
+   - VS CodeのSFTPタブを開く
+   - 「Upload」コマンドを選択
+   - `.vscode/sftp.json` の設定により、`build/client` フォルダの内容だけがサーバーにアップロードされます
+
+## サイトのカスタマイズ
+
+### ヘッダーレイアウトの切り替え
+
+`app/LpData.ts` ファイルを開き、以下の部分を変更します：
+
+```javascript
+export const headerData: HeaderData = {
+    layoutType: "modern", // ここを"standard"または"modern"に変更
+    // ...
+};
+```
+
+- **standard**: 画面上部に固定された伝統的なヘッダー
+- **modern**: 画面右側に固定されたモダンなヘッダー
+
+### レスポンシブ設定の調整
+
+同じファイル内の `responseWidth` の値を変更することで、モバイル表示とPC表示の切り替え幅を調整できます：
+
+```javascript
+responseWidth: 1200, // 数値を変更（ピクセル単位）
+```
+
+### 会社情報の設定
+
+`app/LpData.ts` 内の `companyInformation` セクションで、会社名、住所、電話番号などの情報を変更できます：
+
+```javascript
+export const companyInformation = {
+    name: {
+        key: "会社名",
+        value: "株式会社〇〇〇", // ここを変更
+    },
+    // その他の情報...
+};
+```
+
+### 画像の変更
+
+1. 新しい画像を `public/images` フォルダにアップロード
+2. `app/LpData.ts` 内の対応する `imageName` の値を変更
+
+例：
+```javascript
+logo: {
+    imageName: "新しいロゴ.png", // ファイル名を変更
+}
+```
+
+## 用語解説
+
+- **SPA（単一ページアプリケーション）**: ページ全体を再読み込みせずに画面を切り替える仕組み。滑らかな操作感を実現します。
+
+- **React**: Facebookが開発したユーザーインターフェースを構築するためのJavaScriptライブラリ。
+
+- **Bun**: 最新のJavaScript/TypeScript実行環境で、Node.jsよりも高速な処理を提供します。
+
+- **レスポンシブデザイン**: 閲覧するデバイスの画面サイズに応じて表示を最適化する設計手法。
+
+- **TailwindCSS**: クラス名を組み合わせてスタイルを適用するCSSフレームワーク。
+
+- **WSL（Windows Subsystem for Linux）**: Windows上でLinux環境を実行するための機能。
+
+- **FTP/SFTP**: ファイル転送プロトコル。サーバーにファイルをアップロードするために使用します。
+
+## トラブルシューティング
+
+### ビルドエラーが発生した場合
+
+ビルド中に「EIO: i/o error」などのエラーが表示された場合：
+
+1. `build` フォルダを削除：
+   ```
+   rm -rf build
+   ```
+
+2. もう一度ビルドを実行：
+   ```
+   bun run build
+   ```
+
+### サーバーアップロード時の問題
+
+- アップロードに失敗する場合、FTP接続情報を確認してください
+- `.vscode/sftp.json` ファイルに正しいサーバー情報が設定されているか確認
+
+## 注意点
+
+- `.vscode/sftp.json` にはFTP認証情報が含まれているため、GitHubなどの公開リポジトリにアップロードしないでください。
+- 本番環境にアップロードする前に、すべてのページで正しく表示されるか確認してください。
 
 ---
 
-Built with ❤️ using React Router.
+さらに質問や不明点がある場合は、プロジェクト管理者にお問い合わせください。
