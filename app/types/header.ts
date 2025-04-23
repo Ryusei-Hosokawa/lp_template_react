@@ -8,12 +8,13 @@
 export type HeaderItem = {
     link?: string;
     imageName?: string;
+    imageNameSide?: string;  // サイドメニュー用の画像名
     imageNameSp?: string;
     imageUse?: boolean;
-    logoWidth?: string;
-    logoMaxWidth?: string;
-    logoWidthSp?: string;
     background?: string;
+    logoWidth?: string;      // ロゴの幅
+    logoMaxWidth?: string;   // ロゴの最大幅
+    logoWidthSp?: string;    // スマホ用ロゴ幅
     [key: string]: any;
 };
 
@@ -43,6 +44,19 @@ export type LayoutSettings = {
     [key: string]: string | undefined;
 };
 
+export type ModernLayout = {
+    logoWidthPc: string;
+    logoPosition: string;
+    buttonPosition: string;
+    buttonWidth: string;
+    buttonSpacing: string;
+    background: string;
+    shadow: string;
+    width: string;
+    height: string;
+    zIndex: string;
+}
+
 /**
  * ヘッダーデータの型定義
 */
@@ -50,7 +64,7 @@ export type HeaderData = {
     layoutType: 'standard' | 'modern';
     responseWidth: number;
     standardLayout: LayoutSettings;
-    modernLayout: LayoutSettings;
+    modernLayout: ModernLayout;
     items: {
         [key: string]: HeaderItem;
     };

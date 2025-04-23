@@ -1,47 +1,27 @@
 /**
  * ヘッダーの高さを監視し、メインコンテンツのマージンを動的に調整するロジック
  */
-import { headerData, mainData } from "../LpData"; // ヘッダーとメインデータをインポート
+import { mainData } from "../LpData"; // メインデータのみインポート
 
 // 監視オブジェクトをグローバルに保持
 let resizeObserver: ResizeObserver | null = null;
 let mutationObserver: MutationObserver | null = null;
 
-// 画面幅がメインコンテンツの幅より大きく、モダンレイアウトが使用されている場合にtrueを返す
+// 画面幅がメインコンテンツの幅より大きい場合にtrueを返す
+// この関数は元の実装でheaderData.layoutTypeを使っていたが、現在は常にfalseを返す
 function shouldDisableHeaderResize(): boolean {
-    // レイアウトタイプがモダンかどうか
-    const isModernLayout = headerData.layoutType === "modern";
-    
-    // メインコンテンツの最大幅を解析（Tailwindのクラスから数値を抽出）
-    const maxWidthMatch = mainData.mainWidth.match(/max-w-\[(\d+)px\]/);
-    const maxWidthValue = maxWidthMatch ? parseInt(maxWidthMatch[1], 10) : 660; // デフォルト値
-    
-    // 現在の画面幅
-    const currentWidth = typeof window !== "undefined" ? window.innerWidth : 0;
-    
-    // モダンレイアウトで、かつ画面幅がメインコンテンツの幅より大きい場合
-    return isModernLayout && currentWidth > maxWidthValue;
+    // レイアウトタイプに関わらず、常に機能するためfalseを返す
+    return false;
 }
 
 // ヘッダー要素とメインコンテンツの要素を監視するための関数
 export function observeHeaderHeight() {
-    // モダンレイアウトで大きい画面の場合は何もしない
-    if (shouldDisableHeaderResize()) {
-        cleanupObservers(); // 既存のオブザーバーをクリーンアップ
-        return; // 以降の処理を実行しない
-    }
-
     // 以前のObserverをクリーンアップ
     cleanupObservers();
     
     const initObserver = () => {
-        // モダンレイアウトで大きい画面の場合は何もしない（遅延実行時に再チェック）
-        if (shouldDisableHeaderResize()) {
-            return;
-        }
-
-        // 監視対象のヘッダー要素を取得（より具体的なセレクタを使用）
-        const header = document.querySelector("body > header");
+        // 監視対象のヘッダー要素を取得（standard-headerクラスを持つ要素）
+        const header = document.querySelector(".standard-header");
         // メインコンテンツを取得
         const main = document.querySelector("main");
 
@@ -56,11 +36,6 @@ export function observeHeaderHeight() {
 
         // ResizeObserverを使用してヘッダーの高さ変更を監視
         resizeObserver = new ResizeObserver(() => {
-            // レイアウト変更があった場合に再チェック
-            if (shouldDisableHeaderResize()) {
-                cleanupObservers();
-                return;
-            }
             updateMainMargin(header, main);
         });
 
@@ -73,11 +48,6 @@ export function observeHeaderHeight() {
         // DOM変更の監視（ヘッダーの内容が動的に変更される場合）
         if (window.MutationObserver) {
             mutationObserver = new MutationObserver(() => {
-                // レイアウト変更があった場合に再チェック
-                if (shouldDisableHeaderResize()) {
-                    cleanupObservers();
-                    return;
-                }
                 updateMainMargin(header, main);
             });
             
@@ -91,13 +61,7 @@ export function observeHeaderHeight() {
 
     // リサイズイベントハンドラ
     const handleResize = () => {
-        // レイアウト変更があった場合に再チェック
-        if (shouldDisableHeaderResize()) {
-            cleanupObservers();
-            return;
-        }
-
-        const header = document.querySelector("body > header");
+        const header = document.querySelector(".standard-header");
         const main = document.querySelector("main");
         
         if (header && main) {
@@ -135,13 +99,7 @@ function cleanupObservers() {
 
 // リサイズイベントハンドラ（グローバルスコープに移動）
 function handleResize() {
-    // レイアウト変更があった場合に再チェック
-    if (shouldDisableHeaderResize()) {
-        cleanupObservers();
-        return;
-    }
-
-    const header = document.querySelector("body > header");
+    const header = document.querySelector(".standard-header");
     const main = document.querySelector("main");
     
     if (header && main) {
@@ -158,14 +116,6 @@ function updateMainMargin(header: Element, main: Element) {
 // ReactのuseEffect内で使用するためのカスタムフック
 export function useHeaderResizeEffect() {
     if (typeof window !== "undefined") {
-        // モダンレイアウトで大きい画面の場合は何もしない
-        if (shouldDisableHeaderResize()) {
-            // クリーンアップ関数だけ返す
-            return () => {
-                cleanupObservers();
-            };
-        }
-
         // クライアントサイドでのみ実行
         observeHeaderHeight();
         

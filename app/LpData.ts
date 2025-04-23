@@ -62,13 +62,13 @@ const ogpInfo: OgpInfo = {
 // ヘッダー画像系の情報 ここから ============================================================= //
 export const headerData: HeaderData = {
     // レイアウトタイプの選択 ここから //
-    layoutType: "standard", // "standard" または "modern"を指定
+    layoutType: "modern", // "standard" または "modern"を指定
     // レスポンスの画面幅指定 ここから //
     responseWidth: 1200, // レスポンスの画面幅
     // レスポンスの画面幅指定 ここまで //
     // 標準レイアウト用の設定 ここから //
     standardLayout: {
-        logoWidth: "max-w-[200px]", // ロゴの幅
+        logoWidth: "200px", // ロゴの幅
         maxWidth: "max-w-[1500px]", // コンテンツの最大幅
         padding: "px-[5%] py-[0.5%]", // 内部の余白
         paddingSp: "max-[780px]:px-[3%] max-[780px]:py-[1%]", // スマホ用の余白
@@ -84,8 +84,8 @@ export const headerData: HeaderData = {
     // 標準レイアウト用の設定 ここまで //
     // モダンレイアウト用の追加設定 ここから //
     modernLayout: {
+        logoWidthPc: "20vw", // ロゴの幅
         logoPosition: "top-[15%] right-[20%]", // ロゴの左からの位置
-        logoWidth: "w-[20vw]", // ロゴの幅
         buttonPosition: "bottom-[10%] right-[30%]", // 追従ボタンの位置
         buttonWidth: "w-[42%]", // 追従ボタンの幅
         buttonSpacing: "space-y-[5px]", // CTAボタン間の間隔
@@ -102,8 +102,6 @@ export const headerData: HeaderData = {
         logo: {
             link: "#", // リンク先
             imageName: "logo.png", // 画像名
-            logoMaxWidth: "max-w-[400px]", // ロゴの最大幅
-            logoWidthSp: "max-[780px]:w-[50%]", // スマホのロゴの幅
         },
         // 会社ロゴ ここまで //
         // LINEの画像 ここから //
@@ -268,7 +266,7 @@ export const sideData = {
     }, // 左下側の画像 ここまで //
     right: { // 右下側の画像 ここから //
         imageName: "side_right.png", // 画像名
-        size: "w-[33vw]", // 画像の幅
+        size: "w-[35vw]", // 画像の幅
         position: "bottom-[0%] right-[0%]", // 画像の位置
     }, // 右下側の画像 ここまで //
 };

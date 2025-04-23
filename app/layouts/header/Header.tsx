@@ -1,15 +1,21 @@
-import React, { memo } from "react";
+import React, { memo, useMemo } from "react";
 import { ModernHeader, StandardHeader } from "./index";
+import { headerData } from "../../LpData";
 
 /**
+ * ヘッダーコンポーネント
  * レイアウトタイプに応じて適切なヘッダーコンポーネントをレンダリングする
  */
 export default memo(function Header() {
-    // レイアウトタイプに応じたヘッダーコンポーネントをレンダリング
+    // レイアウトタイプがモダンかどうかを判定
+    const isModernLayout = useMemo(() => {
+        return headerData.layoutType === "modern";
+    }, []);
+
     return (
         <>
-            <ModernHeader />
-            <StandardHeader />
+            <ModernHeader isModernLayout={isModernLayout} />
+            <StandardHeader isModernLayout={isModernLayout} />
         </>
     );
 });
