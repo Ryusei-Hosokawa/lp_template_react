@@ -8,3 +8,9 @@
 # SFTP設定除外
 .vscode/sftp.json
 **/*.env
+
+# デバッグファイル
+debug.cjs
+
+# デプロイファイル
+deploy.cjs

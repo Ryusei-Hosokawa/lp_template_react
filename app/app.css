@@ -5,10 +5,19 @@
         "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+/* React Routerのスクロール制御を無効化し、カスタム実装を優先 */
+:root {
+    scroll-behavior: auto !important;
+    overflow-anchor: none !important;
+}
+
 @layer base {
     html,
     body {
         @apply h-full m-0 p-0 overflow-x-hidden;
+        scroll-behavior: auto !important; /* !importantで優先度を上げ、常に即時スクロールを実現 */
+        overscroll-behavior-y: none !important; /* iOS用のオーバースクロール動作を無効化 */
+        overflow-anchor: none !important; /* スクロールアンカー機能の無効化 */
     }
 }
 
@@ -18,7 +27,16 @@ body {
     font-family: "Noto Sans JP", sans-serif;
     font-feature-settings: "palt";
     scrollbar-gutter: stable;
+    /* 特定の要素が固定されていないことを確認 */
+    contain: none !important;
 }
+
+/* スクロールを強制的に拡張する */
+body.force-scroll-reset {
+    scroll-behavior: auto !important;
+    overflow-anchor: none !important;
+}
+
 body::-webkit-scrollbar {
     display: none; /* Chrome, Safari */
 }
@@ -37,7 +55,16 @@ a {
 }
 
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto !important; /* !importantで優先度を上げ、常に即時スクロールを実現 */
+    overscroll-behavior-y: none !important; /* iOS用のオーバースクロール動作を無効化 */
+    overflow-anchor: none !important; /* スクロールアンカー機能の無効化 */
+}
+
+/* フッターのスクロール問題対策 */
+footer {
+    position: relative !important;
+    top: auto !important;
+    scroll-margin-top: 0 !important;
 }
 
 .hoverAction {

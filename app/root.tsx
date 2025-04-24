@@ -5,7 +5,6 @@ import {
     isRouteErrorResponse, // エラーレスポンスかどうかを判定する関数
     Outlet, // 子ルートのコンポーネントを表示する場所を指定
     Scripts, // JavaScriptを読み込むためのコンポーネント
-    ScrollRestoration, // ページ遷移時のスクロール位置を復元するコンポーネント
     useLocation, // 現在のURLロケーションを取得するフック
 } from "react-router";
 import * as layouts from "./layouts"; // レイアウト関連のコンポーネントをインポート（ヘッダー、フッターなど）
@@ -14,7 +13,7 @@ import "./app.css"; // グローバルCSSをインポート
 import MainBackground from "./components/MainBackground"; // 背景設定用のコンポーネントをインポート
 import { useHeaderResizeEffect } from "./logics/headerResizeObserver"; // ヘッダーのリサイズ監視
 import { fontLinks } from "./layouts/head"; // ヘッド関連の機能をインポート
-import SideBanner from "./layouts/sidebanner/SideBanner"; // サイドバナー要素コンポーネントをインポート
+import { useScrollToTop, resetScrollPosition } from "./logics/scrollLogics"; // スクロール制御用カスタムフック
 
 // フォントリンクをエクスポート
 export const links: Route.LinksFunction = () => [
@@ -26,6 +25,9 @@ export default function App() {
     // ロケーションの変更を監視
     const location = useLocation();
     
+    // ページ遷移時に画面上部にスクロールする
+    useScrollToTop();
+    
     // ヘッダーのリサイズ監視（ページ遷移時にのみ再実行）
     useEffect(() => {
         // ヘッダーのリサイズを監視する
@@ -36,12 +38,48 @@ export default function App() {
             if (cleanup) cleanup();
         };
     }, [location.pathname]); // URLが変わるたびに再実行
+    
+    // DOMロード完了時にもスクロール位置をリセット
+    useEffect(() => {
+        // DOMロード完了時のスクロールリセット
+        window.addEventListener('DOMContentLoaded', () => {
+            resetScrollPosition();
+        });
+        
+        // 初回レンダリング時のスクロールリセット
+        resetScrollPosition();
+        
+        // クリーンアップ関数
+        return () => {
+            window.removeEventListener('DOMContentLoaded', () => {
+                resetScrollPosition();
+            });
+        };
+    }, []);
+    
+    // React Router v7の履歴スタックイベント監視
+    useEffect(() => {
+        // 履歴ナビゲーション（戻る・進む）イベントのリスナー
+        const handlePopState = () => {
+            setTimeout(() => {
+                resetScrollPosition();
+            }, 0);
+        };
+        
+        // React Router以外のナビゲーション時にもスクロールをリセット
+        window.addEventListener('popstate', handlePopState);
+        
+        return () => {
+            window.removeEventListener('popstate', handlePopState);
+        };
+    }, []);
 
     // Layoutは1回だけレンダリングされ、内部のOutletだけがページ遷移時に変更される
     return (
         <html lang="ja">
             <layouts.Head />
             <body className={`relative min-h-screen z-[-100]`}>
+
                 <MainBackground />
                 <layouts.Header />
                 <noscript>
@@ -55,7 +93,6 @@ export default function App() {
                 <Outlet />
                 
                 <layouts.Footer />
-                <ScrollRestoration />
                 <Scripts />
             </body>
         </html>

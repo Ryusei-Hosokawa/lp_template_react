@@ -2,7 +2,7 @@
  * ボタンアクション関連のロジック関数
  */
 import { headerData } from "../LpData";
-import { scrollToForm } from "./scrollLogics";
+import { scrollToForm, resetScrollPosition } from "./scrollLogics";
 import { findItemByType } from "./headerItemTypeFilter";
 
 /**
@@ -54,6 +54,8 @@ export function handleButtonClick(type: string, link?: string): void {
         default:
             // その他のリンク
             if (link) {
+                // スクロール位置をリセットしてからリンク先に移動
+                resetScrollPosition();
                 window.location.href = link;
             }
             break;

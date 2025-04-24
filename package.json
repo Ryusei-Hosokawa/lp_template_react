@@ -7,7 +7,8 @@
         "build": "react-router build",
         "dev": "react-router dev",
         "start": "react-router-serve ./build/server/index.js",
-        "typecheck": "react-router typegen && tsc"
+        "typecheck": "react-router typegen && tsc",
+        "deploy": "node deploy.cjs"
     },
     "dependencies": {
         "@react-router/node": "7.1.0",
@@ -17,7 +18,8 @@
         "react-dom": "18.2.0",
         "react-router": "7.1.0",
         "react-router-devtools": "1.1.0",
-        "react-router-dom": "7.1.0"
+        "react-router-dom": "7.1.0",
+        "sftp-sync-deploy": "^0.7.1"
     },
     "devDependencies": {
         "@react-router/dev": "7.1.0",

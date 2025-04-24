@@ -1,4 +1,5 @@
 import type { NavigateFunction } from 'react-router';
+import { resetScrollPosition } from './scrollLogics';
 
 /**
  * ロゴがクリックされたときの処理を行う関数
@@ -12,7 +13,13 @@ export const handleLogoClick = (pathname: string, navigate: NavigateFunction): v
     if (pathname === "/" || pathname === "") {
         window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
-        // それ以外の場合はホームページへ遷移
+        // それ以外の場合はホームページへ遷移し、スクロール位置もリセット
+        resetScrollPosition();
         navigate("/");
+        
+        // 非同期処理の後にもう一度スクロール位置をリセット
+        setTimeout(() => {
+            resetScrollPosition();
+        }, 100);
     }
-}; 
+};
